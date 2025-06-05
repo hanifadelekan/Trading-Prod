@@ -31,11 +31,7 @@ logging.getLogger().handlers[0].setLevel(logging.DEBUG)  # File handler
 logging.getLogger().handlers[1].setLevel(logging.INFO)   # Console handler
 logger = logging.getLogger('MarketMaker')
 
-# Environment variables for security
-'''API_KEY = os.getenv("BINANCE_API_KEY")
-SECRET_KEY = os.getenv("BINANCE_SECRET_KEY")
-ENVIRONMENT = os.getenv("TRADING_ENV", "TESTNET")  # MAINNET or TESTNET
-'''
+
 SECRET_KEY = 'CLAPcXjcuvvGUsi7Zxz4iFlwbltj9qxvZMRxYxWtZUQaKnKtSHwyIANs5QkunRXO'
 API_KEY = 'kTRUqoZp5aZyGhTVnnsp8SWRMWX618OvLuIYFiqswyioIlssQJgCduPjXa3J6GLt'
 # Constants
@@ -107,19 +103,6 @@ class OrderBook:
             wmidprice = (i*self.best_ask) + ((1-i)*self.best_bid)
             return wmidprice, self.best_bid, self.best_ask, midprice
 
-    '''    @property
-    def best_bid(self) -> Optional[float]:
-        return max(self.bids.keys()) if self.bids else None
-
-    @property
-    def best_ask(self) -> Optional[float]:
-        return min(self.asks.keys()) if self.asks else None
-
-    @property
-    def mid_price(self) -> Optional[float]:
-        if self.best_bid and self.best_ask:
-            return (self.best_bid + self.best_ask) / 2
-        return None'''
 
 class RiskManager:
     def __init__(self, symbol: str, max_long: float, max_short: float, max_order_size: float):
