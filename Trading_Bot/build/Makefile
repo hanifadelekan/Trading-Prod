@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named hyperliquid_bbo
+# Target rules for targets named main
 
 # Build rule for target.
-hyperliquid_bbo: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hyperliquid_bbo
-.PHONY : hyperliquid_bbo
+main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-hyperliquid_bbo/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hyperliquid_bbo.dir/build.make CMakeFiles/hyperliquid_bbo.dir/build
-.PHONY : hyperliquid_bbo/fast
+main/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
 hyperliquid_bbo.o: hyperliquid_bbo.cpp.o
 .PHONY : hyperliquid_bbo.o
 
 # target to build an object file
 hyperliquid_bbo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hyperliquid_bbo.dir/build.make CMakeFiles/hyperliquid_bbo.dir/hyperliquid_bbo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hyperliquid_bbo.cpp.o
 .PHONY : hyperliquid_bbo.cpp.o
 
 hyperliquid_bbo.i: hyperliquid_bbo.cpp.i
@@ -142,7 +142,7 @@ hyperliquid_bbo.i: hyperliquid_bbo.cpp.i
 
 # target to preprocess a source file
 hyperliquid_bbo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hyperliquid_bbo.dir/build.make CMakeFiles/hyperliquid_bbo.dir/hyperliquid_bbo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hyperliquid_bbo.cpp.i
 .PHONY : hyperliquid_bbo.cpp.i
 
 hyperliquid_bbo.s: hyperliquid_bbo.cpp.s
@@ -150,8 +150,32 @@ hyperliquid_bbo.s: hyperliquid_bbo.cpp.s
 
 # target to generate assembly for a file
 hyperliquid_bbo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hyperliquid_bbo.dir/build.make CMakeFiles/hyperliquid_bbo.dir/hyperliquid_bbo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hyperliquid_bbo.cpp.s
 .PHONY : hyperliquid_bbo.cpp.s
+
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -161,10 +185,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... hyperliquid_bbo"
+	@echo "... main"
 	@echo "... hyperliquid_bbo.o"
 	@echo "... hyperliquid_bbo.i"
 	@echo "... hyperliquid_bbo.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

@@ -8,6 +8,9 @@
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/ssl/stream.hpp>
 #include <nlohmann/json.hpp>
+#include <iostream>
+#include "fetch_hyperliquid_bbo.h"  
+
 
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
@@ -17,20 +20,12 @@ using tcp = boost::asio::ip::tcp;
 using json = nlohmann::json;
 using std::string;
 
-struct BBOLevel {
-    double price;
-    double size;
-    int num_orders;
-};
-
-std::vector<BBOLevel> fetch_latest_bbo(const string& symbol, const string& channel) {
-    std::vector<BBOLevel> bbo_levels;
-
+void fetch_bbo_stream(const string& symbol, const string& channel,
+                      const std::function<void(const std::vector<BBOLevel>&)>& on_bbo) {
     try {
         net::io_context io_context;
         ssl::context ssl_ctx{ssl::context::tlsv12_client};
 
-        // Secure SSL configuration
         ssl_ctx.set_options(
             ssl::context::default_workarounds |
             ssl::context::no_sslv2 |
@@ -43,63 +38,49 @@ std::vector<BBOLevel> fetch_latest_bbo(const string& symbol, const string& chann
 
         websocket::stream<beast::ssl_stream<tcp::socket>> ws(io_context, ssl_ctx);
 
-        // Resolve DNS
         tcp::resolver resolver(io_context);
         auto const results = resolver.resolve("api.hyperliquid.xyz", "443");
-
-        // Connect TCP
         net::connect(ws.next_layer().next_layer(), results);
 
-        // Set SNI
         if(!SSL_set_tlsext_host_name(ws.next_layer().native_handle(), "api.hyperliquid.xyz")) {
             throw beast::system_error(
                 beast::error_code(static_cast<int>(::ERR_get_error()), net::error::get_ssl_category()),
                 "Failed to set SNI Hostname"
             );
         }
-
         ws.next_layer().set_verify_mode(ssl::verify_peer);
-
-        // TLS handshake
         ws.next_layer().handshake(ssl::stream_base::client);
-
-        // WebSocket handshake
         ws.handshake("api.hyperliquid.xyz", "/ws");
 
-        // Send subscription message
         json sub_msg = {
             {"method", "subscribe"},
-            {"subscription", {
-                {"type", channel},
-                {"coin", symbol}
-            }}
+            {"subscription", {{"type", channel}, {"coin", symbol}}}
         };
         ws.write(net::buffer(sub_msg.dump()));
 
-        // Read a single message (blocking until received)
         beast::flat_buffer buffer;
-        ws.read(buffer);
-        auto msg = beast::buffers_to_string(buffer.data());
+        while (true) {
+            ws.read(buffer);
+            auto msg = beast::buffers_to_string(buffer.data());
+            buffer.consume(buffer.size());
 
-        // Parse JSON into vector
-        json j = json::parse(msg);
-
-        if (j.contains("data") && j["data"].contains("bbo")) {
-            const auto& bbo_array = j["data"]["bbo"];
-            for (const auto& level : bbo_array) {
-                BBOLevel l;
-                l.price = std::stod(level["px"].get<std::string>());
-                l.size = std::stod(level["sz"].get<std::string>());
-                l.num_orders = level["n"].get<int>();
-                bbo_levels.push_back(l);
+            json j = json::parse(msg);
+            if (j.contains("data") && j["data"].contains("bbo")) {
+                const auto& bbo_array = j["data"]["bbo"];
+                std::vector<BBOLevel> bbo_levels;
+                for (const auto& level : bbo_array) {
+                    BBOLevel l;
+                    l.price = std::stod(level["px"].get<std::string>());
+                    l.size = std::stod(level["sz"].get<std::string>());
+                    l.num_orders = level["n"].get<int>();
+                    bbo_levels.push_back(l);
+                }
+                on_bbo(bbo_levels);  // call your handler with the new BBO snapshot
             }
         }
-
-        ws.close(websocket::close_code::normal); // Clean close
     }
     catch (const std::exception& e) {
-        std::cerr << "Error in fetch_latest_bbo: " << e.what() << std::endl;
+        std::cerr << "Error in fetch_bbo_stream: " << e.what() << std::endl;
     }
-
-    return bbo_levels;
 }
+

@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/hyperliquid_bbo.cpp" "CMakeFiles/hyperliquid_bbo.dir/hyperliquid_bbo.cpp.o" "gcc" "CMakeFiles/hyperliquid_bbo.dir/hyperliquid_bbo.cpp.o.d"
+  "/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/hyperliquid_bbo.cpp" "CMakeFiles/main.dir/hyperliquid_bbo.cpp.o" "gcc" "CMakeFiles/main.dir/hyperliquid_bbo.cpp.o.d"
+  "/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/main.cpp" "CMakeFiles/main.dir/main.cpp.o" "gcc" "CMakeFiles/main.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.
