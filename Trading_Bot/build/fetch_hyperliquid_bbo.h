@@ -3,7 +3,8 @@
 
 #include <vector>
 #include <string>
-#include <functional>
+#include <deque>
+#include <mutex>
 
 struct BBOLevel {
     double price;
@@ -11,9 +12,12 @@ struct BBOLevel {
     int num_orders;
 };
 
-// Declaration: streaming BBO feed calls the handler on each update
-void fetch_bbo_stream(const std::string& symbol,
-                      const std::string& channel,
-                      const std::function<void(const std::vector<BBOLevel>&)>& on_bbo);
+void run_bbo_async_stream(const std::string& symbol, const std::string& channel);
+
+// Shared queue declaration
+extern std::deque<std::vector<BBOLevel>> bbo_queue;
+
+// Shared mutex declaration
+extern std::mutex bbo_mutex;
 
 #endif
