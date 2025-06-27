@@ -9,8 +9,7 @@
 #include <nlohmann/json.hpp>
 #include <iostream>
 #include <thread>
-#include <mutex>
-#include <vector>
+#include "disruptor.h"
 
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
@@ -19,17 +18,11 @@ namespace ssl = boost::asio::ssl;
 using tcp = net::ip::tcp;
 using json = nlohmann::json;
 using std::string;
-#include <queue>
-#include <deque>
 
-std::deque<std::vector<BBOLevel>> bbo_queue;
-
-
-std::mutex bbo_mutex;
-
+// Global Disruptor instance (single producer)
+Disruptor<std::vector<BBOLevel>> disruptor(1024);
 
 void run_bbo_async_stream(const string& symbol, const string& channel) {
-    // Dedicated io_context for network thread
     net::io_context io_context;
     ssl::context ssl_ctx{ssl::context::tlsv12_client};
     ssl_ctx.set_options(
@@ -48,7 +41,7 @@ void run_bbo_async_stream(const string& symbol, const string& channel) {
     auto const results = resolver.resolve("api.hyperliquid.xyz", "443");
     net::connect(ws.next_layer().next_layer(), results);
 
-    if(!SSL_set_tlsext_host_name(ws.next_layer().native_handle(), "api.hyperliquid.xyz")) {
+    if (!SSL_set_tlsext_host_name(ws.next_layer().native_handle(), "api.hyperliquid.xyz")) {
         throw beast::system_error(
             beast::error_code(static_cast<int>(::ERR_get_error()), net::error::get_ssl_category()),
             "Failed to set SNI Hostname"
@@ -66,59 +59,44 @@ void run_bbo_async_stream(const string& symbol, const string& channel) {
 
     auto buffer = std::make_shared<beast::flat_buffer>();
 
-    // Start async read loop
     std::function<void(beast::error_code, std::size_t)> read_handler;
 
-   read_handler = [&](beast::error_code ec, std::size_t bytes_transferred) {
-    if (ec) {
-        if (ec == beast::websocket::error::closed || ec == boost::asio::error::eof) {
-            std::cerr << "WebSocket closed.\n";
-        } else {
-            std::cerr << "WebSocket error: " << ec.message() << "\n";
-        }
-        return;
-    }
-
-    std::string msg = beast::buffers_to_string(buffer->data());
-    buffer->consume(buffer->size());
-
-    try {
-        json j = json::parse(msg);
-        if (j.contains("data") && j["data"].contains("bbo")) {
-            std::vector<BBOLevel> new_bbo;
-            for (const auto& level : j["data"]["bbo"]) {
-                BBOLevel l;
-                l.price = std::stod(level["px"].get<std::string>());
-                l.size = std::stod(level["sz"].get<std::string>());
-                l.num_orders = level["n"].get<int>();
-                new_bbo.push_back(l);
+    read_handler = [&](beast::error_code ec, std::size_t) {
+        if (ec) {
+            if (ec == beast::websocket::error::closed || ec == boost::asio::error::eof) {
+                std::cerr << "WebSocket closed.\n";
+            } else {
+                std::cerr << "WebSocket error: " << ec.message() << "\n";
             }
+            return;
+        }
 
-                        // Safely queue the new snapshot
-            {
-                std::lock_guard<std::mutex> lock(bbo_mutex);
-                if (bbo_queue.size() >= 1000) {
-                    // Remove oldest snapshot to make room
-                    bbo_queue.pop_front();
+        std::string msg = beast::buffers_to_string(buffer->data());
+        buffer->consume(buffer->size());
+
+        try {
+            json j = json::parse(msg);
+            if (j.contains("data") && j["data"].contains("bbo")) {
+                std::vector<BBOLevel> new_bbo;
+                for (const auto& level : j["data"]["bbo"]) {
+                    BBOLevel l;
+                    l.price = std::stod(level["px"].get<std::string>());
+                    l.size = std::stod(level["sz"].get<std::string>());
+                    l.num_orders = level["n"].get<int>();
+                    new_bbo.push_back(l);
                 }
-                bbo_queue.push_back(new_bbo);
+                // Publish the new snapshot to Disruptor
+                disruptor.publish(new_bbo);
             }
-
+        } catch (const std::exception& e) {
+            std::cerr << "JSON parse error: " << e.what() << "\n";
         }
-    } catch (const std::exception& e) {
-        std::cerr << "JSON parse error: " << e.what() << "\n";
-    }
 
-    ws.async_read(*buffer, read_handler);  // re-register
-};
+        ws.async_read(*buffer, read_handler);
+    };
 
-
-    // Start first async read
     ws.async_read(*buffer, read_handler);
 
-    // Prevent io_context from exiting early
     auto work = net::make_work_guard(io_context);
-
-    // Run the io_context loop in this thread
     io_context.run();
 }
