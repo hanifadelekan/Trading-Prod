@@ -23,7 +23,7 @@ struct Key {
 
     StrPos findIn(const std::string_view json, StrPos prevKeyPos) const {
         StrPos absKeyPos = -1;
-        for (StrPos left = std::min<StrPos>(prevKeyPos + relPos, json.size() - KeyLen), right = left + 1;
+        for (StrPos left = std::min<StrPos>(prevKeyPos + relPos, (StrPos)json.size() - KeyLen), right = left + 1;
              left >= 0 || right + KeyLen <= json.size();
              --left, ++right) {
             if (left >= 0 && keyHash == calcHashFrom(json, left)) { absKeyPos = left; break; }
@@ -51,8 +51,8 @@ class HyperliquidParser {
 public:
     BBOLevel parseLevel(std::string_view json) {
         return {
-            .price = parseDoubleKeyAndUpdateRelPos(json, 0, priceKey),
-            .size  = parseDoubleKeyAndUpdateRelPos(json, priceKey.relPos, sizeKey),
+            .price = parsePriceKey(json, 0, priceKey),
+            .size  = parseSizeKey(json, priceKey.relPos, sizeKey),
             .num_orders = parseIntKeyAndUpdateRelPos(json, priceKey.relPos + sizeKey.relPos, numOrdersKey)
         };
     }
@@ -64,7 +64,6 @@ private:
     static constexpr std::string_view SIZE_KEY  = "sz\":\"";   // len 5
     static constexpr std::string_view N_KEY     = "\"n\":";    // len 4
 
-    // Each key has its own window size matching its length:
     NPriv::Key<PRICE_KEY.size(), PRICE_KEY.size()> priceKey   = {PRICE_KEY, 0};
     NPriv::Key<SIZE_KEY.size(), SIZE_KEY.size()>   sizeKey    = {SIZE_KEY, PRICE_KEY.size() + 1};
     NPriv::Key<N_KEY.size(), N_KEY.size()>         numOrdersKey = {N_KEY, SIZE_KEY.size() + 1};
@@ -75,38 +74,58 @@ private:
         return start;
     }
 
-    static double toDouble(std::string_view str, StrPos start) {
-        int64_t intPart = 0, fracPart = 0, fracFactor = 1;
-        bool isFrac = false;
-        for (; start < str.size(); ++start) {
-            char c = str[start];
-            if (c >= '0' && c <= '9') {
-                if (isFrac) {
-                    fracPart = fracPart * 10 + (c - '0');
-                    fracFactor *= 10;
-                } else {
-                    intPart = intPart * 10 + (c - '0');
-                }
-            } else if (c == '.') {
-                isFrac = true;
-            } else break;
+    static double parseFixedDecimal2(std::string_view str, StrPos start) {
+        int64_t intPart = 0, fracPart = 0;
+        while (start < str.size() && str[start] >= '0' && str[start] <= '9') {
+            intPart = intPart * 10 + (str[start] - '0');
+            ++start;
         }
-        return intPart + (fracPart ? double(fracPart) / fracFactor : 0.0);
+        if (start < str.size() && str[start] == '.') {
+            ++start;
+            for (int i = 0; i < 2; ++i) {
+                fracPart *= 10;
+                if (start < str.size() && str[start] >= '0' && str[start] <= '9') {
+                    fracPart += (str[start] - '0');
+                    ++start;
+                }
+            }
+        }
+        return intPart + (static_cast<double>(fracPart) / 100.0);
     }
 
-    static int parseInt(std::string_view str, StrPos start) {
-        int result = 0;
-        for (; start < str.size() && str[start] >= '0' && str[start] <= '9'; ++start)
-            result = result * 10 + (str[start] - '0');
-        return result;
+    static double parseFixedDecimal4(std::string_view str, StrPos start) {
+        int64_t intPart = 0, fracPart = 0;
+        while (start < str.size() && str[start] >= '0' && str[start] <= '9') {
+            intPart = intPart * 10 + (str[start] - '0');
+            ++start;
+        }
+        if (start < str.size() && str[start] == '.') {
+            ++start;
+            for (int i = 0; i < 4; ++i) {
+                fracPart *= 10;
+                if (start < str.size() && str[start] >= '0' && str[start] <= '9') {
+                    fracPart += (str[start] - '0');
+                    ++start;
+                }
+            }
+        }
+        return intPart + (static_cast<double>(fracPart) / 10000.0);
     }
 
     template <class TKey>
-    static double parseDoubleKeyAndUpdateRelPos(std::string_view json, const StrPos prevKeyPos, TKey &key) {
+    static double parsePriceKey(std::string_view json, const StrPos prevKeyPos, TKey& key) {
         const StrPos absKeyPos = key.findIn(json, prevKeyPos);
         key.relPos = absKeyPos - prevKeyPos;
         const StrPos start = skipToValue(json, absKeyPos + TKey::KeyLen);
-        return toDouble(json, start);
+        return parseFixedDecimal2(json, start);
+    }
+
+    template <class TKey>
+    static double parseSizeKey(std::string_view json, const StrPos prevKeyPos, TKey& key) {
+        const StrPos absKeyPos = key.findIn(json, prevKeyPos);
+        key.relPos = absKeyPos - prevKeyPos;
+        const StrPos start = skipToValue(json, absKeyPos + TKey::KeyLen);
+        return parseFixedDecimal4(json, start);
     }
 
     template <class TKey>
@@ -115,5 +134,12 @@ private:
         key.relPos = absKeyPos - prevKeyPos;
         const StrPos start = skipToValue(json, absKeyPos + TKey::KeyLen);
         return parseInt(json, start);
+    }
+
+    static int parseInt(std::string_view str, StrPos start) {
+        int result = 0;
+        for (; start < str.size() && str[start] >= '0' && str[start] <= '9'; ++start)
+            result = result * 10 + (str[start] - '0');
+        return result;
     }
 };

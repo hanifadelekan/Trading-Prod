@@ -369,6 +369,54 @@ third_party/imgui/misc/cpp/imgui_stdlib.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.s
 .PHONY : third_party/imgui/misc/cpp/imgui_stdlib.cpp.s
 
+third_party/implot/implot.o: third_party/implot/implot.cpp.o
+.PHONY : third_party/implot/implot.o
+
+# target to build an object file
+third_party/implot/implot.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/third_party/implot/implot.cpp.o
+.PHONY : third_party/implot/implot.cpp.o
+
+third_party/implot/implot.i: third_party/implot/implot.cpp.i
+.PHONY : third_party/implot/implot.i
+
+# target to preprocess a source file
+third_party/implot/implot.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/third_party/implot/implot.cpp.i
+.PHONY : third_party/implot/implot.cpp.i
+
+third_party/implot/implot.s: third_party/implot/implot.cpp.s
+.PHONY : third_party/implot/implot.s
+
+# target to generate assembly for a file
+third_party/implot/implot.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/third_party/implot/implot.cpp.s
+.PHONY : third_party/implot/implot.cpp.s
+
+third_party/implot/implot_items.o: third_party/implot/implot_items.cpp.o
+.PHONY : third_party/implot/implot_items.o
+
+# target to build an object file
+third_party/implot/implot_items.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/third_party/implot/implot_items.cpp.o
+.PHONY : third_party/implot/implot_items.cpp.o
+
+third_party/implot/implot_items.i: third_party/implot/implot_items.cpp.i
+.PHONY : third_party/implot/implot_items.i
+
+# target to preprocess a source file
+third_party/implot/implot_items.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/third_party/implot/implot_items.cpp.i
+.PHONY : third_party/implot/implot_items.cpp.i
+
+third_party/implot/implot_items.s: third_party/implot/implot_items.cpp.s
+.PHONY : third_party/implot/implot_items.s
+
+# target to generate assembly for a file
+third_party/implot/implot_items.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/third_party/implot/implot_items.cpp.s
+.PHONY : third_party/implot/implot_items.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -408,6 +456,12 @@ help:
 	@echo "... third_party/imgui/misc/cpp/imgui_stdlib.o"
 	@echo "... third_party/imgui/misc/cpp/imgui_stdlib.i"
 	@echo "... third_party/imgui/misc/cpp/imgui_stdlib.s"
+	@echo "... third_party/implot/implot.o"
+	@echo "... third_party/implot/implot.i"
+	@echo "... third_party/implot/implot.s"
+	@echo "... third_party/implot/implot_items.o"
+	@echo "... third_party/implot/implot_items.i"
+	@echo "... third_party/implot/implot_items.s"
 .PHONY : help
 
 

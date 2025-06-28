@@ -19,6 +19,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o.d"
   "CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o"
   "CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o.d"
+  "CMakeFiles/main.dir/third_party/implot/implot.cpp.o"
+  "CMakeFiles/main.dir/third_party/implot/implot.cpp.o.d"
+  "CMakeFiles/main.dir/third_party/implot/implot_items.cpp.o"
+  "CMakeFiles/main.dir/third_party/implot/implot_items.cpp.o.d"
   "main"
   "main.pdb"
 )

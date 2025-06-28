@@ -18,6 +18,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_tables.cpp" "CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o" "gcc" "CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o.d"
   "/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_widgets.cpp" "CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o" "gcc" "CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o.d"
   "/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/misc/cpp/imgui_stdlib.cpp" "CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o" "gcc" "CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o.d"
+  "/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/implot/implot.cpp" "CMakeFiles/main.dir/third_party/implot/implot.cpp.o" "gcc" "CMakeFiles/main.dir/third_party/implot/implot.cpp.o.d"
+  "/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/implot/implot_items.cpp" "CMakeFiles/main.dir/third_party/implot/implot_items.cpp.o" "gcc" "CMakeFiles/main.dir/third_party/implot/implot_items.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

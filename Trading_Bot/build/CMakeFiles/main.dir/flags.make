@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DGL_SILENCE_DEPRECATION
 
-CXX_INCLUDES = -I/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui -I/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends -I/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -isystem /opt/homebrew/include
+CXX_INCLUDES = -I/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui -I/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends -I/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/implot -I/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -isystem /opt/homebrew/include
 
 CXX_FLAGSarm64 = -std=c++17 -arch arm64 -O3 -march=native
 

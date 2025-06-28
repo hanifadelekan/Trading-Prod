@@ -6,6 +6,7 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <thread>
 #include <iostream>
+#include <implot.h>
 
 std::thread net_thread;
 
@@ -31,6 +32,8 @@ int main() {
     // Initialize ImGui with docking support
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+    ImPlot::CreateContext();  // <-- ADD THIS
+
     ImGuiIO& io = ImGui::GetIO();
     
     // Enable docking and multi-viewport
@@ -53,7 +56,7 @@ int main() {
 
     // Start network thread
     net_thread = std::thread([]() {
-        run_bbo_async_stream("BTC", "bbo");
+        run_bbo_async_stream("SOL", "bbo");
     });
 
     // Create BBO viewer
@@ -71,9 +74,18 @@ int main() {
         // Create docking space
         ImGuiID dockspace_id = ImGui::DockSpaceOverViewport(ImGuiDockNodeFlags_None);
 
-
-        // Render our viewer
+        // Render our viewer panel
+        ImGui::Begin("BBO Snapshot");
         viewer.RenderFrame();
+        ImGui::End();
+
+        // Add a second control panel
+        ImGui::Begin("Control");
+        ImGui::Text("Control panel contents go here.");
+        if (ImGui::Button("Do Something")) {
+            std::cout << "Control button clicked!\n";
+        }
+        ImGui::End();
 
         // Rendering
         ImGui::Render();
@@ -99,6 +111,7 @@ int main() {
     net_thread.join();
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
+    ImPlot::DestroyContext(); 
     ImGui::DestroyContext();
     
     glfwDestroyWindow(window);

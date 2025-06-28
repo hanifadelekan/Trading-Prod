@@ -1002,4 +1002,5 @@ CMakeFiles/main.dir/main.cpp.o: \
   /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_glfw.h \
   /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_opengl3.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/TargetConditionals.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
+  /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/implot/implot.h
