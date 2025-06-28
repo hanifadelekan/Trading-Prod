@@ -93,8 +93,13 @@ int main() {
         ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_None);
 
         // Draw BBO Snapshot window, resizable & movable by user
-        ImGui::Begin("BBO Snapshot");
-        viewer.RenderFrame();
+        ImGui::Begin("control");
+                ImGui::Text("Control Panel Content Here");
+        // Add your control panel elements here
+        if (ImGui::Button("Button 1")) {
+            std::cout << "Button 1 clicked!\n";
+        }
+        
         ImGui::End();
 
         // --- Draw Control panel ---
@@ -105,12 +110,8 @@ int main() {
         }
 
         // Removed ImGuiWindowFlags_AlwaysAutoResize to allow user resizing
-        ImGui::Begin("Control", nullptr, ImGuiWindowFlags_NoDocking);
-        ImGui::Text("Control Panel Content Here");
-        // Add your control panel elements here
-        if (ImGui::Button("Button 1")) {
-            std::cout << "Button 1 clicked!\n";
-        }
+        ImGui::Begin("BBO Snapshot", nullptr, ImGuiWindowFlags_NoDocking);
+        viewer.RenderFrame();
         // Removed "Fullscreen Control Window" checkbox
         // Removed "Target Monitor" dropdown
 
