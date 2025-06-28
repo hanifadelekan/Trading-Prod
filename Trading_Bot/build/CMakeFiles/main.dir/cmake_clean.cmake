@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/main.dir/hyperliquid_bbo.cpp.o"
   "CMakeFiles/main.dir/hyperliquid_bbo.cpp.o.d"
+  "CMakeFiles/main.dir/hyperliquid_orderbook.cpp.o"
+  "CMakeFiles/main.dir/hyperliquid_orderbook.cpp.o.d"
   "CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o"
   "CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o.d"
   "CMakeFiles/main.dir/main.cpp.o"

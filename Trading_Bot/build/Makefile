@@ -153,6 +153,30 @@ hyperliquid_bbo.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hyperliquid_bbo.cpp.s
 .PHONY : hyperliquid_bbo.cpp.s
 
+hyperliquid_orderbook.o: hyperliquid_orderbook.cpp.o
+.PHONY : hyperliquid_orderbook.o
+
+# target to build an object file
+hyperliquid_orderbook.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hyperliquid_orderbook.cpp.o
+.PHONY : hyperliquid_orderbook.cpp.o
+
+hyperliquid_orderbook.i: hyperliquid_orderbook.cpp.i
+.PHONY : hyperliquid_orderbook.i
+
+# target to preprocess a source file
+hyperliquid_orderbook.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hyperliquid_orderbook.cpp.i
+.PHONY : hyperliquid_orderbook.cpp.i
+
+hyperliquid_orderbook.s: hyperliquid_orderbook.cpp.s
+.PHONY : hyperliquid_orderbook.s
+
+# target to generate assembly for a file
+hyperliquid_orderbook.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hyperliquid_orderbook.cpp.s
+.PHONY : hyperliquid_orderbook.cpp.s
+
 imgui_bbo_viewer.o: imgui_bbo_viewer.cpp.o
 .PHONY : imgui_bbo_viewer.o
 
@@ -429,6 +453,9 @@ help:
 	@echo "... hyperliquid_bbo.o"
 	@echo "... hyperliquid_bbo.i"
 	@echo "... hyperliquid_bbo.s"
+	@echo "... hyperliquid_orderbook.o"
+	@echo "... hyperliquid_orderbook.i"
+	@echo "... hyperliquid_orderbook.s"
 	@echo "... imgui_bbo_viewer.o"
 	@echo "... imgui_bbo_viewer.i"
 	@echo "... imgui_bbo_viewer.s"

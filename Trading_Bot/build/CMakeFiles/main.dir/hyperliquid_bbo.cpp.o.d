@@ -1,6 +1,7 @@
 CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/hyperliquid_bbo.cpp \
   /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/fetch_hyperliquid_bbo.h \
+  /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/disruptor.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/vector \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_move_common.h \
@@ -902,6 +903,30 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstdarg \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/temp_value.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__split_buffer \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/thread \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/formatter.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/jthread.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/stop_source.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/intrusive_shared_ptr.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/stop_state.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/atomic_unique_lock.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/intrusive_list_view.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/stop_token.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/thread.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bitset \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/format \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/container_adaptor.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/range_default_formatter.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/statically_widen.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/range_formatter.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_context.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_arg_store.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_args.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/ref_view.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/deque \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/binary_negate.h \
@@ -928,21 +953,6 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_unary_function.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_negate.h \
-  /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/hyperliquid_parser.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bitset \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/format \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/container_adaptor.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/range_default_formatter.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/statically_widen.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/range_formatter.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_context.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_arg_store.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_args.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/ref_view.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/queue \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/format_functions.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/formatter_char.h \
@@ -957,8 +967,26 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/formatter_tuple.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/print \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/unistd.h \
-  /opt/homebrew/include/boost/beast/core.hpp \
-  /opt/homebrew/include/boost/beast/core/detail/config.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/this_thread.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/chrono \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/calendar.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/convert_to_tm.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/concepts.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/hh_mm_ss.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/day.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/month.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/month_weekday.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/weekday.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/monthday.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_day.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_weekday.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/literals.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \
+  /opt/homebrew/include/boost/asio/io_context.hpp \
+  /opt/homebrew/include/boost/asio/detail/config.hpp \
   /opt/homebrew/include/boost/config.hpp \
   /opt/homebrew/include/boost/config/user.hpp \
   /opt/homebrew/include/boost/config/detail/select_compiler_config.hpp \
@@ -984,55 +1012,42 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/filesystem \
   /opt/homebrew/include/boost/config/detail/cxx_composite.hpp \
   /opt/homebrew/include/boost/version.hpp \
-  /opt/homebrew/include/boost/core/ignore_unused.hpp \
-  /opt/homebrew/include/boost/static_assert.hpp \
-  /opt/homebrew/include/boost/detail/workaround.hpp \
-  /opt/homebrew/include/boost/config/workaround.hpp \
-  /opt/homebrew/include/boost/preprocessor/cat.hpp \
-  /opt/homebrew/include/boost/preprocessor/config/config.hpp \
-  /opt/homebrew/include/boost/beast/core/async_base.hpp \
-  /opt/homebrew/include/boost/beast/core/detail/allocator.hpp \
-  /opt/homebrew/include/boost/beast/core/detail/async_base.hpp \
-  /opt/homebrew/include/boost/core/exchange.hpp \
-  /opt/homebrew/include/boost/beast/core/detail/filtering_cancellation_slot.hpp \
-  /opt/homebrew/include/boost/asio/cancellation_signal.hpp \
-  /opt/homebrew/include/boost/asio/detail/config.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cassert \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/assert.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_assert.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_static_assert.h \
-  /opt/homebrew/include/boost/asio/cancellation_type.hpp \
+  /opt/homebrew/include/boost/asio/async_result.hpp \
+  /opt/homebrew/include/boost/asio/detail/type_traits.hpp \
   /opt/homebrew/include/boost/asio/detail/push_options.hpp \
   /opt/homebrew/include/boost/asio/detail/pop_options.hpp \
-  /opt/homebrew/include/boost/asio/detail/cstddef.hpp \
-  /opt/homebrew/include/boost/asio/detail/type_traits.hpp \
-  /opt/homebrew/include/boost/asio/impl/cancellation_signal.ipp \
-  /opt/homebrew/include/boost/asio/detail/thread_context.hpp \
-  /opt/homebrew/include/boost/asio/detail/call_stack.hpp \
+  /opt/homebrew/include/boost/asio/default_completion_token.hpp \
+  /opt/homebrew/include/boost/asio/deferred.hpp \
+  /opt/homebrew/include/boost/asio/associator.hpp \
+  /opt/homebrew/include/boost/asio/detail/utility.hpp \
+  /opt/homebrew/include/boost/asio/impl/deferred.hpp \
+  /opt/homebrew/include/boost/asio/detail/chrono.hpp \
+  /opt/homebrew/include/boost/asio/detail/concurrency_hint.hpp \
   /opt/homebrew/include/boost/asio/detail/noncopyable.hpp \
-  /opt/homebrew/include/boost/asio/detail/tss_ptr.hpp \
-  /opt/homebrew/include/boost/asio/detail/keyword_tss_ptr.hpp \
-  /opt/homebrew/include/boost/asio/detail/impl/thread_context.ipp \
-  /opt/homebrew/include/boost/asio/detail/thread_info_base.hpp \
-  /opt/homebrew/include/boost/asio/detail/memory.hpp \
   /opt/homebrew/include/boost/asio/detail/cstdint.hpp \
+  /opt/homebrew/include/boost/asio/detail/wrapped_handler.hpp \
+  /opt/homebrew/include/boost/asio/detail/bind_handler.hpp \
+  /opt/homebrew/include/boost/asio/detail/handler_cont_helpers.hpp \
+  /opt/homebrew/include/boost/asio/detail/memory.hpp \
   /opt/homebrew/include/boost/asio/detail/throw_exception.hpp \
   /opt/homebrew/include/boost/throw_exception.hpp \
   /opt/homebrew/include/boost/exception/exception.hpp \
   /opt/homebrew/include/boost/assert/source_location.hpp \
   /opt/homebrew/include/boost/cstdint.hpp \
+  /opt/homebrew/include/boost/config/workaround.hpp \
   /opt/homebrew/include/boost/align/aligned_alloc.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h \
   /opt/homebrew/include/boost/align/detail/aligned_alloc_posix.hpp \
   /opt/homebrew/include/boost/align/detail/is_alignment.hpp \
   /opt/homebrew/include/boost/assert.hpp \
-  /opt/homebrew/include/boost/asio/multiple_exceptions.hpp \
-  /opt/homebrew/include/boost/asio/impl/multiple_exceptions.ipp \
-  /opt/homebrew/include/boost/beast/core/detail/work_guard.hpp \
-  /opt/homebrew/include/boost/asio/executor_work_guard.hpp \
-  /opt/homebrew/include/boost/asio/associated_executor.hpp \
-  /opt/homebrew/include/boost/asio/associator.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/assert.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_assert.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_static_assert.h \
+  /opt/homebrew/include/boost/asio/handler_continuation_hook.hpp \
+  /opt/homebrew/include/boost/asio/detail/initiate_dispatch.hpp \
+  /opt/homebrew/include/boost/asio/associated_allocator.hpp \
   /opt/homebrew/include/boost/asio/detail/functional.hpp \
+  /opt/homebrew/include/boost/asio/associated_executor.hpp \
   /opt/homebrew/include/boost/asio/execution/executor.hpp \
   /opt/homebrew/include/boost/asio/execution/invocable_archetype.hpp \
   /opt/homebrew/include/boost/asio/traits/equality_comparable.hpp \
@@ -1048,10 +1063,18 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/asio/execution/any_executor.hpp \
   /opt/homebrew/include/boost/asio/detail/assert.hpp \
   /opt/homebrew/include/boost/asio/detail/atomic_count.hpp \
+  /opt/homebrew/include/boost/asio/detail/cstddef.hpp \
   /opt/homebrew/include/boost/asio/detail/executor_function.hpp \
   /opt/homebrew/include/boost/asio/detail/handler_alloc_helpers.hpp \
   /opt/homebrew/include/boost/asio/detail/recycling_allocator.hpp \
-  /opt/homebrew/include/boost/asio/associated_allocator.hpp \
+  /opt/homebrew/include/boost/asio/detail/thread_context.hpp \
+  /opt/homebrew/include/boost/asio/detail/call_stack.hpp \
+  /opt/homebrew/include/boost/asio/detail/tss_ptr.hpp \
+  /opt/homebrew/include/boost/asio/detail/keyword_tss_ptr.hpp \
+  /opt/homebrew/include/boost/asio/detail/impl/thread_context.ipp \
+  /opt/homebrew/include/boost/asio/detail/thread_info_base.hpp \
+  /opt/homebrew/include/boost/asio/multiple_exceptions.hpp \
+  /opt/homebrew/include/boost/asio/impl/multiple_exceptions.ipp \
   /opt/homebrew/include/boost/asio/detail/non_const_lvalue.hpp \
   /opt/homebrew/include/boost/asio/detail/scoped_ptr.hpp \
   /opt/homebrew/include/boost/asio/execution/bad_executor.hpp \
@@ -1104,6 +1127,7 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/system/detail/throws.hpp \
   /opt/homebrew/include/boost/asio/detail/impl/throw_error.ipp \
   /opt/homebrew/include/boost/system/system_error.hpp \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cassert \
   /opt/homebrew/include/boost/asio/error.hpp \
   /opt/homebrew/include/boost/cerrno.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/netdb.h \
@@ -1123,23 +1147,6 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/asio/detail/scoped_lock.hpp \
   /opt/homebrew/include/boost/asio/detail/impl/posix_mutex.ipp \
   /opt/homebrew/include/boost/asio/execution/context.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/chrono \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/calendar.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/convert_to_tm.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/concepts.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/hh_mm_ss.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/day.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/month.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/month_weekday.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/weekday.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/monthday.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_day.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_weekday.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/literals.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/forward_list \
   /opt/homebrew/include/boost/asio/execution/context_as.hpp \
   /opt/homebrew/include/boost/asio/execution/mapping.hpp \
   /opt/homebrew/include/boost/asio/execution/occupancy.hpp \
@@ -1161,11 +1168,6 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/asio/execution_context.hpp \
   /opt/homebrew/include/boost/asio/impl/execution_context.hpp \
   /opt/homebrew/include/boost/asio/detail/handler_type_requirements.hpp \
-  /opt/homebrew/include/boost/asio/async_result.hpp \
-  /opt/homebrew/include/boost/asio/default_completion_token.hpp \
-  /opt/homebrew/include/boost/asio/deferred.hpp \
-  /opt/homebrew/include/boost/asio/detail/utility.hpp \
-  /opt/homebrew/include/boost/asio/impl/deferred.hpp \
   /opt/homebrew/include/boost/asio/detail/service_registry.hpp \
   /opt/homebrew/include/boost/asio/detail/impl/service_registry.hpp \
   /opt/homebrew/include/boost/asio/detail/impl/service_registry.ipp \
@@ -1182,7 +1184,6 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/asio/config.hpp \
   /opt/homebrew/include/boost/asio/impl/config.hpp \
   /opt/homebrew/include/boost/asio/impl/config.ipp \
-  /opt/homebrew/include/boost/asio/detail/concurrency_hint.hpp \
   /opt/homebrew/include/boost/asio/detail/limits.hpp \
   /opt/homebrew/include/boost/asio/detail/scheduler_thread_info.hpp \
   /opt/homebrew/include/boost/asio/detail/signal_blocker.hpp \
@@ -1232,6 +1233,125 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/asio/detail/thread_group.hpp \
   /opt/homebrew/include/boost/asio/impl/system_context.hpp \
   /opt/homebrew/include/boost/asio/impl/system_context.ipp \
+  /opt/homebrew/include/boost/asio/detail/work_dispatcher.hpp \
+  /opt/homebrew/include/boost/asio/executor_work_guard.hpp \
+  /opt/homebrew/include/boost/asio/impl/io_context.hpp \
+  /opt/homebrew/include/boost/asio/detail/completion_handler.hpp \
+  /opt/homebrew/include/boost/asio/detail/handler_work.hpp \
+  /opt/homebrew/include/boost/asio/associated_immediate_executor.hpp \
+  /opt/homebrew/include/boost/asio/impl/io_context.ipp \
+  /opt/homebrew/include/boost/asio/ssl/context.hpp \
+  /opt/homebrew/include/boost/asio/buffer.hpp \
+  /opt/homebrew/include/boost/asio/detail/array_fwd.hpp \
+  /opt/homebrew/include/boost/asio/detail/string_view.hpp \
+  /opt/homebrew/include/boost/asio/is_contiguous_iterator.hpp \
+  /opt/homebrew/include/boost/asio/detail/is_buffer_sequence.hpp \
+  /opt/homebrew/include/boost/asio/ssl/context_base.hpp \
+  /opt/homebrew/include/boost/asio/ssl/detail/openssl_types.hpp \
+  /opt/homebrew/include/openssl/conf.h \
+  /opt/homebrew/include/openssl/macros.h \
+  /opt/homebrew/include/openssl/opensslconf.h \
+  /opt/homebrew/include/openssl/configuration.h \
+  /opt/homebrew/include/openssl/opensslv.h \
+  /opt/homebrew/include/openssl/bio.h \
+  /opt/homebrew/include/openssl/e_os2.h \
+  /opt/homebrew/include/openssl/crypto.h \
+  /opt/homebrew/include/openssl/safestack.h \
+  /opt/homebrew/include/openssl/stack.h \
+  /opt/homebrew/include/openssl/types.h \
+  /opt/homebrew/include/openssl/cryptoerr.h \
+  /opt/homebrew/include/openssl/symhacks.h \
+  /opt/homebrew/include/openssl/cryptoerr_legacy.h \
+  /opt/homebrew/include/openssl/core.h \
+  /opt/homebrew/include/openssl/bioerr.h \
+  /opt/homebrew/include/openssl/lhash.h \
+  /opt/homebrew/include/openssl/conferr.h \
+  /opt/homebrew/include/openssl/conftypes.h \
+  /opt/homebrew/include/openssl/ssl.h \
+  /opt/homebrew/include/openssl/e_ostime.h \
+  /opt/homebrew/include/openssl/comp.h \
+  /opt/homebrew/include/openssl/comperr.h \
+  /opt/homebrew/include/openssl/x509.h \
+  /opt/homebrew/include/openssl/buffer.h \
+  /opt/homebrew/include/openssl/buffererr.h \
+  /opt/homebrew/include/openssl/evp.h \
+  /opt/homebrew/include/openssl/core_dispatch.h \
+  /opt/homebrew/include/openssl/indicator.h \
+  /opt/homebrew/include/openssl/params.h \
+  /opt/homebrew/include/openssl/bn.h \
+  /opt/homebrew/include/openssl/bnerr.h \
+  /opt/homebrew/include/openssl/evperr.h \
+  /opt/homebrew/include/openssl/objects.h \
+  /opt/homebrew/include/openssl/obj_mac.h \
+  /opt/homebrew/include/openssl/asn1.h \
+  /opt/homebrew/include/openssl/asn1err.h \
+  /opt/homebrew/include/openssl/objectserr.h \
+  /opt/homebrew/include/openssl/ec.h \
+  /opt/homebrew/include/openssl/ecerr.h \
+  /opt/homebrew/include/openssl/rsa.h \
+  /opt/homebrew/include/openssl/rsaerr.h \
+  /opt/homebrew/include/openssl/dsa.h /opt/homebrew/include/openssl/dh.h \
+  /opt/homebrew/include/openssl/dherr.h \
+  /opt/homebrew/include/openssl/dsaerr.h \
+  /opt/homebrew/include/openssl/sha.h \
+  /opt/homebrew/include/openssl/x509err.h \
+  /opt/homebrew/include/openssl/x509_vfy.h \
+  /opt/homebrew/include/openssl/pkcs7.h \
+  /opt/homebrew/include/openssl/pkcs7err.h \
+  /opt/homebrew/include/openssl/http.h \
+  /opt/homebrew/include/openssl/pem.h \
+  /opt/homebrew/include/openssl/pemerr.h \
+  /opt/homebrew/include/openssl/hmac.h \
+  /opt/homebrew/include/openssl/async.h \
+  /opt/homebrew/include/openssl/asyncerr.h \
+  /opt/homebrew/include/openssl/ct.h \
+  /opt/homebrew/include/openssl/cterr.h \
+  /opt/homebrew/include/openssl/sslerr.h \
+  /opt/homebrew/include/openssl/sslerr_legacy.h \
+  /opt/homebrew/include/openssl/prov_ssl.h \
+  /opt/homebrew/include/openssl/ssl2.h \
+  /opt/homebrew/include/openssl/ssl3.h \
+  /opt/homebrew/include/openssl/tls1.h \
+  /opt/homebrew/include/openssl/dtls1.h \
+  /opt/homebrew/include/openssl/srtp.h \
+  /opt/homebrew/include/openssl/quic.h \
+  /opt/homebrew/include/openssl/engine.h \
+  /opt/homebrew/include/openssl/rand.h \
+  /opt/homebrew/include/openssl/randerr.h \
+  /opt/homebrew/include/openssl/ui.h \
+  /opt/homebrew/include/openssl/uierr.h \
+  /opt/homebrew/include/openssl/err.h \
+  /opt/homebrew/include/openssl/engineerr.h \
+  /opt/homebrew/include/openssl/x509v3.h \
+  /opt/homebrew/include/openssl/x509v3err.h \
+  /opt/homebrew/include/boost/asio/ssl/detail/openssl_init.hpp \
+  /opt/homebrew/include/boost/asio/ssl/detail/impl/openssl_init.ipp \
+  /opt/homebrew/include/boost/asio/ssl/detail/password_callback.hpp \
+  /opt/homebrew/include/boost/asio/ssl/detail/verify_callback.hpp \
+  /opt/homebrew/include/boost/asio/ssl/verify_context.hpp \
+  /opt/homebrew/include/boost/asio/ssl/verify_mode.hpp \
+  /opt/homebrew/include/boost/asio/ssl/impl/context.hpp \
+  /opt/homebrew/include/boost/asio/ssl/impl/context.ipp \
+  /opt/homebrew/include/boost/asio/ssl/error.hpp \
+  /opt/homebrew/include/boost/asio/ssl/impl/error.ipp \
+  /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/hyperliquid_parser.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
+  /opt/homebrew/include/boost/beast/core.hpp \
+  /opt/homebrew/include/boost/beast/core/detail/config.hpp \
+  /opt/homebrew/include/boost/core/ignore_unused.hpp \
+  /opt/homebrew/include/boost/static_assert.hpp \
+  /opt/homebrew/include/boost/detail/workaround.hpp \
+  /opt/homebrew/include/boost/preprocessor/cat.hpp \
+  /opt/homebrew/include/boost/preprocessor/config/config.hpp \
+  /opt/homebrew/include/boost/beast/core/async_base.hpp \
+  /opt/homebrew/include/boost/beast/core/detail/allocator.hpp \
+  /opt/homebrew/include/boost/beast/core/detail/async_base.hpp \
+  /opt/homebrew/include/boost/core/exchange.hpp \
+  /opt/homebrew/include/boost/beast/core/detail/filtering_cancellation_slot.hpp \
+  /opt/homebrew/include/boost/asio/cancellation_signal.hpp \
+  /opt/homebrew/include/boost/asio/cancellation_type.hpp \
+  /opt/homebrew/include/boost/asio/impl/cancellation_signal.ipp \
+  /opt/homebrew/include/boost/beast/core/detail/work_guard.hpp \
   /opt/homebrew/include/boost/optional.hpp \
   /opt/homebrew/include/boost/optional/optional.hpp \
   /opt/homebrew/include/boost/core/addressof.hpp \
@@ -1307,17 +1427,11 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/optional/detail/optional_swap.hpp \
   /opt/homebrew/include/boost/asio/append.hpp \
   /opt/homebrew/include/boost/asio/impl/append.hpp \
-  /opt/homebrew/include/boost/asio/detail/handler_cont_helpers.hpp \
-  /opt/homebrew/include/boost/asio/handler_continuation_hook.hpp \
   /opt/homebrew/include/boost/asio/detail/initiation_base.hpp \
   /opt/homebrew/include/boost/asio/associated_cancellation_slot.hpp \
-  /opt/homebrew/include/boost/asio/associated_immediate_executor.hpp \
   /opt/homebrew/include/boost/asio/bind_executor.hpp \
   /opt/homebrew/include/boost/asio/uses_executor.hpp \
   /opt/homebrew/include/boost/asio/dispatch.hpp \
-  /opt/homebrew/include/boost/asio/detail/initiate_dispatch.hpp \
-  /opt/homebrew/include/boost/asio/detail/work_dispatcher.hpp \
-  /opt/homebrew/include/boost/asio/detail/bind_handler.hpp \
   /opt/homebrew/include/boost/asio/post.hpp \
   /opt/homebrew/include/boost/asio/detail/initiate_post.hpp \
   /opt/homebrew/include/boost/core/empty_value.hpp \
@@ -1401,7 +1515,6 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/date_time/adjust_functors.hpp \
   /opt/homebrew/include/boost/date_time/wrapping_int.hpp \
   /opt/homebrew/include/boost/date_time/date_generators.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /opt/homebrew/include/boost/date_time/date_clock_device.hpp \
   /opt/homebrew/include/boost/date_time/date_iterator.hpp \
   /opt/homebrew/include/boost/date_time/time_system_split.hpp \
@@ -1588,14 +1701,7 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/asio/detail/timer_scheduler.hpp \
   /opt/homebrew/include/boost/asio/detail/timer_scheduler_fwd.hpp \
   /opt/homebrew/include/boost/asio/detail/wait_handler.hpp \
-  /opt/homebrew/include/boost/asio/detail/handler_work.hpp \
   /opt/homebrew/include/boost/asio/detail/io_object_impl.hpp \
-  /opt/homebrew/include/boost/asio/io_context.hpp \
-  /opt/homebrew/include/boost/asio/detail/chrono.hpp \
-  /opt/homebrew/include/boost/asio/detail/wrapped_handler.hpp \
-  /opt/homebrew/include/boost/asio/impl/io_context.hpp \
-  /opt/homebrew/include/boost/asio/detail/completion_handler.hpp \
-  /opt/homebrew/include/boost/asio/impl/io_context.ipp \
   /opt/homebrew/include/boost/asio/wait_traits.hpp \
   /opt/homebrew/include/boost/beast/core/error.hpp \
   /opt/homebrew/include/boost/beast/core/impl/error.hpp \
@@ -1605,11 +1711,6 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/beast/core/stream_traits.hpp \
   /opt/homebrew/include/boost/beast/core/detail/static_const.hpp \
   /opt/homebrew/include/boost/beast/core/detail/stream_traits.hpp \
-  /opt/homebrew/include/boost/asio/buffer.hpp \
-  /opt/homebrew/include/boost/asio/detail/array_fwd.hpp \
-  /opt/homebrew/include/boost/asio/detail/string_view.hpp \
-  /opt/homebrew/include/boost/asio/is_contiguous_iterator.hpp \
-  /opt/homebrew/include/boost/asio/detail/is_buffer_sequence.hpp \
   /opt/homebrew/include/boost/type_traits/make_void.hpp \
   /opt/homebrew/include/boost/asio/basic_socket.hpp \
   /opt/homebrew/include/boost/asio/socket_base.hpp \
@@ -1994,95 +2095,6 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/beast/ssl/ssl_stream.hpp \
   /opt/homebrew/include/boost/beast/websocket/ssl.hpp \
   /opt/homebrew/include/boost/asio/ssl/stream.hpp \
-  /opt/homebrew/include/boost/asio/ssl/context.hpp \
-  /opt/homebrew/include/boost/asio/ssl/context_base.hpp \
-  /opt/homebrew/include/boost/asio/ssl/detail/openssl_types.hpp \
-  /opt/homebrew/include/openssl/conf.h \
-  /opt/homebrew/include/openssl/macros.h \
-  /opt/homebrew/include/openssl/opensslconf.h \
-  /opt/homebrew/include/openssl/configuration.h \
-  /opt/homebrew/include/openssl/opensslv.h \
-  /opt/homebrew/include/openssl/bio.h \
-  /opt/homebrew/include/openssl/e_os2.h \
-  /opt/homebrew/include/openssl/crypto.h \
-  /opt/homebrew/include/openssl/safestack.h \
-  /opt/homebrew/include/openssl/stack.h \
-  /opt/homebrew/include/openssl/types.h \
-  /opt/homebrew/include/openssl/cryptoerr.h \
-  /opt/homebrew/include/openssl/symhacks.h \
-  /opt/homebrew/include/openssl/cryptoerr_legacy.h \
-  /opt/homebrew/include/openssl/core.h \
-  /opt/homebrew/include/openssl/bioerr.h \
-  /opt/homebrew/include/openssl/lhash.h \
-  /opt/homebrew/include/openssl/conferr.h \
-  /opt/homebrew/include/openssl/conftypes.h \
-  /opt/homebrew/include/openssl/ssl.h \
-  /opt/homebrew/include/openssl/e_ostime.h \
-  /opt/homebrew/include/openssl/comp.h \
-  /opt/homebrew/include/openssl/comperr.h \
-  /opt/homebrew/include/openssl/x509.h \
-  /opt/homebrew/include/openssl/buffer.h \
-  /opt/homebrew/include/openssl/buffererr.h \
-  /opt/homebrew/include/openssl/evp.h \
-  /opt/homebrew/include/openssl/core_dispatch.h \
-  /opt/homebrew/include/openssl/indicator.h \
-  /opt/homebrew/include/openssl/params.h \
-  /opt/homebrew/include/openssl/bn.h \
-  /opt/homebrew/include/openssl/bnerr.h \
-  /opt/homebrew/include/openssl/evperr.h \
-  /opt/homebrew/include/openssl/objects.h \
-  /opt/homebrew/include/openssl/obj_mac.h \
-  /opt/homebrew/include/openssl/asn1.h \
-  /opt/homebrew/include/openssl/asn1err.h \
-  /opt/homebrew/include/openssl/objectserr.h \
-  /opt/homebrew/include/openssl/ec.h \
-  /opt/homebrew/include/openssl/ecerr.h \
-  /opt/homebrew/include/openssl/rsa.h \
-  /opt/homebrew/include/openssl/rsaerr.h \
-  /opt/homebrew/include/openssl/dsa.h /opt/homebrew/include/openssl/dh.h \
-  /opt/homebrew/include/openssl/dherr.h \
-  /opt/homebrew/include/openssl/dsaerr.h \
-  /opt/homebrew/include/openssl/sha.h \
-  /opt/homebrew/include/openssl/x509err.h \
-  /opt/homebrew/include/openssl/x509_vfy.h \
-  /opt/homebrew/include/openssl/pkcs7.h \
-  /opt/homebrew/include/openssl/pkcs7err.h \
-  /opt/homebrew/include/openssl/http.h \
-  /opt/homebrew/include/openssl/pem.h \
-  /opt/homebrew/include/openssl/pemerr.h \
-  /opt/homebrew/include/openssl/hmac.h \
-  /opt/homebrew/include/openssl/async.h \
-  /opt/homebrew/include/openssl/asyncerr.h \
-  /opt/homebrew/include/openssl/ct.h \
-  /opt/homebrew/include/openssl/cterr.h \
-  /opt/homebrew/include/openssl/sslerr.h \
-  /opt/homebrew/include/openssl/sslerr_legacy.h \
-  /opt/homebrew/include/openssl/prov_ssl.h \
-  /opt/homebrew/include/openssl/ssl2.h \
-  /opt/homebrew/include/openssl/ssl3.h \
-  /opt/homebrew/include/openssl/tls1.h \
-  /opt/homebrew/include/openssl/dtls1.h \
-  /opt/homebrew/include/openssl/srtp.h \
-  /opt/homebrew/include/openssl/quic.h \
-  /opt/homebrew/include/openssl/engine.h \
-  /opt/homebrew/include/openssl/rand.h \
-  /opt/homebrew/include/openssl/randerr.h \
-  /opt/homebrew/include/openssl/ui.h \
-  /opt/homebrew/include/openssl/uierr.h \
-  /opt/homebrew/include/openssl/err.h \
-  /opt/homebrew/include/openssl/engineerr.h \
-  /opt/homebrew/include/openssl/x509v3.h \
-  /opt/homebrew/include/openssl/x509v3err.h \
-  /opt/homebrew/include/boost/asio/ssl/detail/openssl_init.hpp \
-  /opt/homebrew/include/boost/asio/ssl/detail/impl/openssl_init.ipp \
-  /opt/homebrew/include/boost/asio/ssl/detail/password_callback.hpp \
-  /opt/homebrew/include/boost/asio/ssl/detail/verify_callback.hpp \
-  /opt/homebrew/include/boost/asio/ssl/verify_context.hpp \
-  /opt/homebrew/include/boost/asio/ssl/verify_mode.hpp \
-  /opt/homebrew/include/boost/asio/ssl/impl/context.hpp \
-  /opt/homebrew/include/boost/asio/ssl/impl/context.ipp \
-  /opt/homebrew/include/boost/asio/ssl/error.hpp \
-  /opt/homebrew/include/boost/asio/ssl/impl/error.ipp \
   /opt/homebrew/include/boost/asio/ssl/detail/buffered_handshake_op.hpp \
   /opt/homebrew/include/boost/asio/ssl/detail/engine.hpp \
   /opt/homebrew/include/boost/asio/detail/static_mutex.hpp \
@@ -2287,18 +2299,6 @@ CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: \
   /opt/homebrew/include/boost/beast/websocket/impl/read.hpp \
   /opt/homebrew/include/boost/beast/websocket/impl/stream.hpp \
   /opt/homebrew/include/boost/beast/websocket/impl/write.hpp \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/thread \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/formatter.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/jthread.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/stop_source.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/intrusive_shared_ptr.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/stop_state.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/atomic_unique_lock.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/intrusive_list_view.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__stop_token/stop_token.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/thread.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/this_thread.h \
-  /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/disruptor.h \
   /opt/homebrew/include/nlohmann/json.hpp \
   /opt/homebrew/include/nlohmann/adl_serializer.hpp \
   /opt/homebrew/include/nlohmann/detail/abi_macros.hpp \

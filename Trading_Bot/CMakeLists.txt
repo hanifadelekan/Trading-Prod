@@ -6,13 +6,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(IMGUI_ROOT_DIR ${CMAKE_SOURCE_DIR}/third_party/imgui)
-set(IMPLOT_ROOT_DIR ${CMAKE_SOURCE_DIR}/third_party/implot)  # NEW: define ImPlot root
+set(IMPLOT_ROOT_DIR ${CMAKE_SOURCE_DIR}/third_party/implot)
 
 set(APP_SOURCES
     main.cpp
     imgui_bbo_viewer.cpp
     hyperliquid_bbo.cpp
-    # Add your parser implementation here if needed
+    hyperliquid_orderbook.cpp        # NEW: your orderbook feed
 )
 
 set(IMGUI_CORE_SOURCES
@@ -41,13 +41,13 @@ add_executable(main
     ${IMGUI_CORE_SOURCES}
     ${IMGUI_BACKEND_SOURCES}
     ${IMGUI_MISC_SOURCES}
-    ${IMPLOT_SOURCES}   # NEW: add ImPlot sources to build
+    ${IMPLOT_SOURCES}
 )
 
 target_include_directories(main PRIVATE
     ${IMGUI_ROOT_DIR}
     ${IMGUI_ROOT_DIR}/backends
-    ${IMPLOT_ROOT_DIR}  # NEW: include ImPlot headers
+    ${IMPLOT_ROOT_DIR}
     ${CMAKE_SOURCE_DIR}
     /opt/homebrew/include
 )
