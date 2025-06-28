@@ -8,7 +8,6 @@
 #include <iostream>
 
 std::thread net_thread;
-bool stream_started = false;
 
 int main() {
     if (!glfwInit()) return 1;
@@ -52,6 +51,11 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 150");
 
+    // Start network thread
+    net_thread = std::thread([]() {
+        run_bbo_async_stream("BTC", "bbo");
+    });
+
     // Create BBO viewer
     ImGuiBBOViewer viewer(window);
 
@@ -72,13 +76,9 @@ int main() {
 
         // Add a second control panel
         ImGui::Begin("Control");
-        ImGui::Text("Press button to start async BBO stream.");
-        if (!stream_started && ImGui::Button("Start Stream")) {
-            stream_started = true;
-            net_thread = std::thread([]() {
-                run_bbo_async_stream("BTC-USD", "bbo");
-            });
-            std::cout << "Network stream started.\n";
+        ImGui::Text("Control panel contents go here.");
+        if (ImGui::Button("Do Something")) {
+            std::cout << "Control button clicked!\n";
         }
         ImGui::End();
 
@@ -103,9 +103,7 @@ int main() {
     }
 
     // Cleanup
-    if (stream_started && net_thread.joinable()) {
-        net_thread.join();
-    }
+    net_thread.join();
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
