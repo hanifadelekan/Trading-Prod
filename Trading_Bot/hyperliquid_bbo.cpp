@@ -10,6 +10,7 @@
 #include <iostream>
 #include <thread>
 #include "disruptor.h"
+#include <chrono> 
 
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
@@ -76,7 +77,12 @@ void run_bbo_async_stream(const string& symbol, const string& channel) {
         buffer->consume(buffer->size());
 
         try {
+            auto start = std::chrono::high_resolution_clock::now();
             json j = json::parse(msg);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::micro> duration_us = end - start;
+
+            std::cout << "[Parser] JSON parse took " << duration_us.count() << " us\n";
             if (j.contains("data") && j["data"].contains("bbo")) {
                 std::vector<BBOLevel> new_bbo;
                 for (const auto& level : j["data"]["bbo"]) {
