@@ -73,46 +73,175 @@ CMakeFiles/main.dir/codegen:
 .PHONY : CMakeFiles/main.dir/codegen
 
 CMakeFiles/main.dir/main.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/main.cpp.o: main.cpp
+CMakeFiles/main.dir/main.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/main.cpp
 CMakeFiles/main.dir/main.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/main.cpp.o -MF CMakeFiles/main.dir/main.cpp.o.d -o CMakeFiles/main.dir/main.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/main.cpp
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/main.cpp.o -MF CMakeFiles/main.dir/main.cpp.o.d -o CMakeFiles/main.dir/main.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/main.cpp
 
 CMakeFiles/main.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/main.cpp > CMakeFiles/main.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/main.cpp > CMakeFiles/main.dir/main.cpp.i
 
 CMakeFiles/main.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/main.cpp -o CMakeFiles/main.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/main.cpp -o CMakeFiles/main.dir/main.cpp.s
+
+CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/imgui_bbo_viewer.cpp
+CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o -MF CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o.d -o CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/imgui_bbo_viewer.cpp
+
+CMakeFiles/main.dir/imgui_bbo_viewer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/imgui_bbo_viewer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/imgui_bbo_viewer.cpp > CMakeFiles/main.dir/imgui_bbo_viewer.cpp.i
+
+CMakeFiles/main.dir/imgui_bbo_viewer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/imgui_bbo_viewer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/imgui_bbo_viewer.cpp -o CMakeFiles/main.dir/imgui_bbo_viewer.cpp.s
 
 CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: hyperliquid_bbo.cpp
+CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/hyperliquid_bbo.cpp
 CMakeFiles/main.dir/hyperliquid_bbo.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/main.dir/hyperliquid_bbo.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/hyperliquid_bbo.cpp.o -MF CMakeFiles/main.dir/hyperliquid_bbo.cpp.o.d -o CMakeFiles/main.dir/hyperliquid_bbo.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/hyperliquid_bbo.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/main.dir/hyperliquid_bbo.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/hyperliquid_bbo.cpp.o -MF CMakeFiles/main.dir/hyperliquid_bbo.cpp.o.d -o CMakeFiles/main.dir/hyperliquid_bbo.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/hyperliquid_bbo.cpp
 
 CMakeFiles/main.dir/hyperliquid_bbo.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/hyperliquid_bbo.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/hyperliquid_bbo.cpp > CMakeFiles/main.dir/hyperliquid_bbo.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/hyperliquid_bbo.cpp > CMakeFiles/main.dir/hyperliquid_bbo.cpp.i
 
 CMakeFiles/main.dir/hyperliquid_bbo.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/hyperliquid_bbo.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/hyperliquid_bbo.cpp -o CMakeFiles/main.dir/hyperliquid_bbo.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/hyperliquid_bbo.cpp -o CMakeFiles/main.dir/hyperliquid_bbo.cpp.s
+
+CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui.cpp
+CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o -MF CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o.d -o CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui.cpp
+
+CMakeFiles/main.dir/third_party/imgui/imgui.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/third_party/imgui/imgui.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui.cpp > CMakeFiles/main.dir/third_party/imgui/imgui.cpp.i
+
+CMakeFiles/main.dir/third_party/imgui/imgui.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/third_party/imgui/imgui.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui.cpp -o CMakeFiles/main.dir/third_party/imgui/imgui.cpp.s
+
+CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_draw.cpp
+CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o -MF CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o.d -o CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_draw.cpp
+
+CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_draw.cpp > CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.i
+
+CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_draw.cpp -o CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.s
+
+CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_widgets.cpp
+CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o -MF CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o.d -o CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_widgets.cpp
+
+CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_widgets.cpp > CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.i
+
+CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_widgets.cpp -o CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.s
+
+CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_tables.cpp
+CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o -MF CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o.d -o CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_tables.cpp
+
+CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_tables.cpp > CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.i
+
+CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/imgui_tables.cpp -o CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.s
+
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_glfw.cpp
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o -MF CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o.d -o CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_glfw.cpp
+
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_glfw.cpp > CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.i
+
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_glfw.cpp -o CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.s
+
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_opengl3.cpp
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o -MF CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o.d -o CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_opengl3.cpp
+
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_opengl3.cpp > CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.i
+
+CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/backends/imgui_impl_opengl3.cpp -o CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.s
+
+CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o: /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/misc/cpp/imgui_stdlib.cpp
+CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o: CMakeFiles/main.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o -MF CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o.d -o CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o -c /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/misc/cpp/imgui_stdlib.cpp
+
+CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/misc/cpp/imgui_stdlib.cpp > CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.i
+
+CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/third_party/imgui/misc/cpp/imgui_stdlib.cpp -o CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
 "CMakeFiles/main.dir/main.cpp.o" \
-"CMakeFiles/main.dir/hyperliquid_bbo.cpp.o"
+"CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o" \
+"CMakeFiles/main.dir/hyperliquid_bbo.cpp.o" \
+"CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o" \
+"CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o" \
+"CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o" \
+"CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o" \
+"CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o" \
+"CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o" \
+"CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
 main: CMakeFiles/main.dir/main.cpp.o
+main: CMakeFiles/main.dir/imgui_bbo_viewer.cpp.o
 main: CMakeFiles/main.dir/hyperliquid_bbo.cpp.o
+main: CMakeFiles/main.dir/third_party/imgui/imgui.cpp.o
+main: CMakeFiles/main.dir/third_party/imgui/imgui_draw.cpp.o
+main: CMakeFiles/main.dir/third_party/imgui/imgui_widgets.cpp.o
+main: CMakeFiles/main.dir/third_party/imgui/imgui_tables.cpp.o
+main: CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_glfw.cpp.o
+main: CMakeFiles/main.dir/third_party/imgui/backends/imgui_impl_opengl3.cpp.o
+main: CMakeFiles/main.dir/third_party/imgui/misc/cpp/imgui_stdlib.cpp.o
 main: CMakeFiles/main.dir/build.make
+main: /opt/homebrew/lib/libglfw.3.4.dylib
 main: CMakeFiles/main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable main"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

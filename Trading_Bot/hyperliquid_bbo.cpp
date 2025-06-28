@@ -72,6 +72,7 @@ void run_bbo_async_stream(const string& symbol, const string& channel) {
         }
 
         std::string msg = beast::buffers_to_string(buffer->data());
+        //std:: cout << msg << std::endl;
         buffer->consume(buffer->size());
 
         try {
