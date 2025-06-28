@@ -26,15 +26,68 @@ HyperliquidParser parser;
 namespace net = boost::asio;
 namespace ssl = net::ssl;
 
+// Make these global or static to main, but we will control their lifecycle
 std::thread bbo_thread;
 std::thread ob_thread;
 
+// These will be initialized once at startup, outside the control of the button
 std::shared_ptr<net::io_context> shared_io_context;
 std::unique_ptr<ssl::context> shared_ssl_context;
 using work_guard_type = net::executor_work_guard<net::io_context::executor_type>;
 std::unique_ptr<work_guard_type> work_guard;
 
+// Pointer for ImGuiBBOViewer, will be created on demand
+std::unique_ptr<ImGuiBBOViewer> bbo_viewer;
+
+// Flags to control state
+bool market_data_started = false;
+bool show_bbo_snapshot_window = false;
+
+// Forward declaration for a helper function to start streams
+void StartMarketDataStreams(GLFWwindow* window) {
+    if (!market_data_started) {
+        // Reset io_context for a clean run if it was previously stopped
+        // This is crucial if you intend to restart it after stopping.
+        // For a simple start-once scenario, you might not need the reset.
+        // However, if io_context::run() was called and returned, it's "stopped".
+        // To run it again, you usually need to call io_context::restart().
+        // For simplicity here, we ensure it's only called once.
+        std::cout << "Starting market data streams...\n";
+
+        // IMPORTANT: The io_context must be "restarted" if its .run() method has completed
+        // or if it was explicitly stopped.
+        // Since we are creating a new shared_io_context for this example,
+        // it implicitly handles the "restart" for its first run().
+        // If you intended to re-use a single shared_io_context that was already .run() and finished,
+        // you would call shared_io_context->restart(); here.
+
+        bbo_thread = std::thread([]() {
+            std::cout << "BBO thread started. Setting up stream...\n";
+            run_bbo_async_stream(shared_io_context, *shared_ssl_context, "BTC", "bbo");
+            shared_io_context->run(); // This blocks until work_guard is reset or io_context is stopped
+            std::cout << "BBO thread io_context finished.\n";
+        });
+
+        ob_thread = std::thread([]() {
+            std::cout << "Order Book thread started. Setting up stream...\n";
+            run_orderbook_async_stream(shared_io_context, *shared_ssl_context, "BTC");
+            shared_io_context->run(); // This blocks until work_guard is reset or io_context is stopped
+            std::cout << "Order Book thread io_context finished.\n";
+        });
+
+        // Create the viewer only when market data starts
+        bbo_viewer = std::make_unique<ImGuiBBOViewer>(window);
+
+        market_data_started = true;
+        show_bbo_snapshot_window = true; // Automatically show the window when streams start
+    } else {
+        std::cout << "Market data streams already running.\n";
+    }
+}
+
+
 int main() {
+    // These must be initialized once at startup
     shared_io_context = std::make_shared<net::io_context>();
     shared_ssl_context = std::make_unique<ssl::context>(ssl::context::tlsv12_client);
     shared_ssl_context->set_options(ssl::context::default_workarounds | ssl::context::no_sslv2 | ssl::context::no_sslv3 | ssl::context::no_tlsv1 | ssl::context::no_tlsv1_1 | ssl::context::single_dh_use);
@@ -62,21 +115,7 @@ int main() {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 150");
 
-    bbo_thread = std::thread([]() {
-        std::cout << "BBO thread started. Setting up stream...\n";
-        run_bbo_async_stream(shared_io_context, *shared_ssl_context, "BTC", "bbo");
-        shared_io_context->run();
-        std::cout << "BBO thread io_context finished.\n";
-    });
-
-    ob_thread = std::thread([]() {
-        std::cout << "Order Book thread started. Setting up stream...\n";
-        run_orderbook_async_stream(shared_io_context, *shared_ssl_context, "BTC");
-        shared_io_context->run();
-        std::cout << "Order Book thread io_context finished.\n";
-    });
-
-    ImGuiBBOViewer viewer(window);
+    // OrderManager initialization can happen early as it doesn't depend on the streams directly
     OrderManager order_manager;
     order_manager.init();
 
@@ -92,39 +131,43 @@ int main() {
 
         ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_None);
 
-        // Draw BBO Snapshot window, resizable & movable by user
-        ImGui::Begin("control");
-                ImGui::Text("Control Panel Content Here");
-        // Add your control panel elements here
-        if (ImGui::Button("Button 1")) {
-            std::cout << "Button 1 clicked!\n";
-        }
-        
-        ImGui::End();
-
-        // --- Draw Control panel ---
+        // --- "Control" Window (the main panel) ---
         // Conditionally set initial size if not already set
         if (!control_window_initial_size_set) {
-             ImGui::SetNextWindowSize(ImVec2(300, 400), ImGuiCond_Once); // Set a reasonable initial size
-             control_window_initial_size_set = true;
+             // For the main control panel, you might want a default size,
+             // or let it auto-resize if its content is stable.
+             // ImGui::SetNextWindowSize(ImVec2(300, 400), ImGuiCond_Once);
+             control_window_initial_size_set = true; // Even if not setting, mark as handled
         }
 
-        // Removed ImGuiWindowFlags_AlwaysAutoResize to allow user resizing
-        ImGui::Begin("BBO Snapshot", nullptr, ImGuiWindowFlags_NoDocking);
-        viewer.RenderFrame();
-        // Removed "Fullscreen Control Window" checkbox
-        // Removed "Target Monitor" dropdown
+        ImGui::Begin("Control"); // This is now your main panel
+        ImGui::Text("Control Panel Content Here");
+
+        // Button to start threads and spawn the BBO plot window
+        if (!market_data_started) {
+            if (ImGui::Button("Start Market Data & BBO Plot")) {
+                StartMarketDataStreams(window);
+            }
+        } else {
+            ImGui::TextColored(ImVec4(0, 1, 0, 1), "Market Data Running");
+            if (ImGui::Button("Toggle BBO Snapshot Window")) {
+                show_bbo_snapshot_window = !show_bbo_snapshot_window;
+            }
+        }
+
+        // You can add other control panel elements here
+        if (ImGui::Button("Button 1 (Example)")) {
+            std::cout << "Button 1 clicked!\n";
+        }
 
         ImGui::End(); // End "Control" window
 
-        // --- No more logic for fullscreen or target monitor in this block ---
-        // The window will behave as a standard OS window with its own title bar
-        // and be user-resizable. If you want to remove the decoration and
-        // the user has to drag it manually, that's possible too, but removing
-        // the decoration usually comes with the expectation of programmatic control
-        // over position/size (like a fullscreen toggle).
-        // Since you removed the programmatic control, leaving decorations means
-        // the user has the usual OS window controls.
+        // --- BBO Snapshot Window (conditionally shown) ---
+        if (show_bbo_snapshot_window && bbo_viewer) { // Only draw if flag is true AND viewer is instantiated
+            ImGui::Begin("BBO Snapshot", &show_bbo_snapshot_window, ImGuiWindowFlags_NoDocking); // Pass &show_bbo_snapshot_window to allow user to close
+            bbo_viewer->RenderFrame();
+            ImGui::End();
+        }
 
         order_manager.process();
         ImGui::Render();
@@ -147,11 +190,18 @@ int main() {
     }
 
     std::cout << "Shutting down...\n";
+    // Signal io_context to stop work, allowing threads to finish their current tasks
+    // and for io_context->run() to return.
     work_guard.reset();
-    shared_io_context->stop(); // Signal io_context to stop
+    shared_io_context->stop();
 
+    // Join threads before destroying contexts to ensure they complete cleanly
     if (bbo_thread.joinable()) bbo_thread.join();
     if (ob_thread.joinable()) ob_thread.join();
+    std::cout << "All background threads joined.\n";
+
+    // Destruct ImGuiBBOViewer before ImGui context is destroyed
+    bbo_viewer.reset();
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
