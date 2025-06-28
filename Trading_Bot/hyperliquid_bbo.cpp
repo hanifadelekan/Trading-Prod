@@ -1,4 +1,5 @@
 #include "fetch_hyperliquid_bbo.h"
+#include "hyperliquid_parser.h"  // <-- your new fast parser header
 #include <boost/beast/core.hpp>
 #include <boost/beast/ssl.hpp>
 #include <boost/beast/websocket.hpp>
@@ -6,22 +7,22 @@
 #include <boost/asio/connect.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/ssl/stream.hpp>
-#include <nlohmann/json.hpp>
 #include <iostream>
 #include <thread>
 #include "disruptor.h"
-#include <chrono> 
+#include <chrono>
+#include <nlohmann/json.hpp>
 
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
 namespace net = boost::asio;
 namespace ssl = boost::asio::ssl;
 using tcp = net::ip::tcp;
-using json = nlohmann::json;
 using std::string;
 
 // Global Disruptor instance (single producer)
 Disruptor<std::vector<BBOLevel>> disruptor(1024);
+HyperliquidParser parser;  // your custom parser instance
 
 void run_bbo_async_stream(const string& symbol, const string& channel) {
     net::io_context io_context;
@@ -52,7 +53,8 @@ void run_bbo_async_stream(const string& symbol, const string& channel) {
     ws.next_layer().handshake(ssl::stream_base::client);
     ws.handshake("api.hyperliquid.xyz", "/ws");
 
-    json sub_msg = {
+    // Subscribe to Hyperliquid BBO
+    nlohmann::json sub_msg = {
         {"method", "subscribe"},
         {"subscription", {{"type", channel}, {"coin", symbol}}}
     };
@@ -73,31 +75,53 @@ void run_bbo_async_stream(const string& symbol, const string& channel) {
         }
 
         std::string msg = beast::buffers_to_string(buffer->data());
-        //std:: cout << msg << std::endl;
         buffer->consume(buffer->size());
 
-        try {
-            auto start = std::chrono::high_resolution_clock::now();
-            json j = json::parse(msg);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double, std::micro> duration_us = end - start;
+    try {
+        auto start = std::chrono::high_resolution_clock::now();
 
-            std::cout << "[Parser] JSON parse took " << duration_us.count() << " us\n";
-            if (j.contains("data") && j["data"].contains("bbo")) {
-                std::vector<BBOLevel> new_bbo;
-                for (const auto& level : j["data"]["bbo"]) {
-                    BBOLevel l;
-                    l.price = std::stod(level["px"].get<std::string>());
-                    l.size = std::stod(level["sz"].get<std::string>());
-                    l.num_orders = level["n"].get<int>();
-                    new_bbo.push_back(l);
-                }
-                // Publish the new snapshot to Disruptor
-                disruptor.publish(new_bbo);
-            }
-        } catch (const std::exception& e) {
-            std::cerr << "JSON parse error: " << e.what() << "\n";
+        // Manually locate start of "bbo":[
+        size_t bbo_array_pos = msg.find("\"bbo\":[");
+        if (bbo_array_pos == std::string::npos) {
+            throw std::runtime_error("No 'bbo' array found in message!");
         }
+
+        size_t arr_start = msg.find('[', bbo_array_pos);
+        size_t arr_end   = msg.find(']', arr_start);
+        if (arr_start == std::string::npos || arr_end == std::string::npos || arr_end <= arr_start) {
+            throw std::runtime_error("Malformed BBO array!");
+        }
+
+        std::string_view array_content(msg.data() + arr_start + 1, arr_end - arr_start - 1);
+
+        std::vector<BBOLevel> new_bbo;
+
+        size_t pos = 0;
+        while (pos < array_content.size()) {
+            size_t obj_start = array_content.find('{', pos);
+            if (obj_start == std::string::npos) break;
+
+            size_t obj_end = array_content.find('}', obj_start);
+            if (obj_end == std::string::npos) break;
+
+            std::string_view level_json(array_content.data() + obj_start, obj_end - obj_start + 1);
+
+            BBOLevel lvl = parser.parseLevel(level_json);
+            new_bbo.push_back(lvl);
+
+            pos = obj_end + 1;
+        }
+
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::micro> duration_us = end - start;
+
+        std::cout << "[Parser] Custom parse took " << duration_us.count() << " us\n";
+
+        disruptor.publish(new_bbo);
+    } catch (const std::exception& e) {
+        std::cerr << "Custom parser error: " << e.what() << "\n";
+    }
+
 
         ws.async_read(*buffer, read_handler);
     };

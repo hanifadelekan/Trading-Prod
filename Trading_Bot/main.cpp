@@ -71,16 +71,9 @@ int main() {
         // Create docking space
         ImGuiID dockspace_id = ImGui::DockSpaceOverViewport(ImGuiDockNodeFlags_None);
 
-        // Render our viewer panel
-        viewer.RenderFrame();
 
-        // Add a second control panel
-        ImGui::Begin("Control");
-        ImGui::Text("Control panel contents go here.");
-        if (ImGui::Button("Do Something")) {
-            std::cout << "Control button clicked!\n";
-        }
-        ImGui::End();
+        // Render our viewer
+        viewer.RenderFrame();
 
         // Rendering
         ImGui::Render();
