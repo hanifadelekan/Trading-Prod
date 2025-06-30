@@ -18,7 +18,7 @@ public:
             // Do not throw, just return empty snapshot.
             return snapshot;
         }
-
+        
         // Correctly find the start of the outer levels array, which is "[[", not just "["
         // The json looks like: "levels":[[...],[...]]
         size_t outer_arr_start_delimiter = json.find("[[", levels_key_pos);

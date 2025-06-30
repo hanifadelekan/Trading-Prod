@@ -13,7 +13,7 @@
 #include <nlohmann/json.hpp>
 #include <functional>
 #include <memory>
-
+#include "disruptor.h"
 namespace beast = boost::beast;
 namespace websocket = beast::websocket;
 namespace net = boost::asio;
@@ -81,6 +81,8 @@ void run_orderbook_async_stream(std::shared_ptr<net::io_context> io_context_ptr,
                 auto levels_pos = msg.find("\"levels\":[");
                 if (levels_pos != std::string::npos) {   // ✅ correct levels check
                     snapshot = ob_parser.parse(msg);
+                    size_t time_pos = msg.find("\"time\":");
+                    std::string_view time_content(msg.data() + time_pos + 7,13);
 
                     if (snapshot.updates.size() > 1000) {
                         throw std::runtime_error("[OrderBook] Abnormal message: too many levels");
@@ -96,7 +98,10 @@ void run_orderbook_async_stream(std::shared_ptr<net::io_context> io_context_ptr,
                             }
                         }
                         double imbalance = order_book.calculate_imbalance_ignore_top();
-                    
+                        double raw_timestamp_us = std::stod(std::string(time_content)); // Assuming time_content is string of microseconds
+                        double timestamp_sec = raw_timestamp_us / 1000.0;
+                        OBSnapshot snapshot{imbalance, timestamp_sec};
+                        obdisruptor.publish(snapshot);
                         // order_book.print_top_levels(); // uncomment for debug
                     }
                 } else {

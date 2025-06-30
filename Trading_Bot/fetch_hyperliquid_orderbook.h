@@ -1,5 +1,5 @@
 #pragma once
-
+#include "disruptor.h"
 #include <vector>
 #include <string> // Added for std::string
 #include <memory>   // Added for std::shared_ptr
@@ -35,6 +35,11 @@ struct OrderBookSnapshot {
     std::vector<OBLevelUpdate> updates; // multiple updates per message
 };
 
+struct OBSnapshot {
+    double imb;
+    double timestamp;
+};
+extern Disruptor<OBSnapshot> obdisruptor;
 // Function to run the order book async stream
 // Now uses the aliased namespaces
 void run_orderbook_async_stream(std::shared_ptr<net::io_context> io_context,

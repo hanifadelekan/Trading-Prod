@@ -22,6 +22,7 @@ struct BBOSnapshot {
     std::vector<BBOLevel> levels;
     double midprice;
     double weighted_midprice;
+    double timestamp;
 };
 extern Disruptor<BBOSnapshot> disruptor;
 void run_bbo_async_stream(std::shared_ptr<net::io_context> io_context,

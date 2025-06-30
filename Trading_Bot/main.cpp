@@ -20,7 +20,7 @@
 
 // Global disruptor now uses BBOSnapshot, not vector<BBOLevel>
 Disruptor<BBOSnapshot> disruptor(1024);
-
+Disruptor<OBSnapshot> obdisruptor(1024);
 HyperliquidParser parser;
 
 namespace net = boost::asio;

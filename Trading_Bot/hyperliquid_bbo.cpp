@@ -103,7 +103,11 @@ void run_bbo_async_stream(std::shared_ptr<net::io_context> io_context_ptr,
                         double imbalance = size_sum > 0.0 ? bid.size / size_sum : 0.5;
                         weighted_mid = (imbalance * ask.price) + ((1.0 - imbalance) * bid.price);
                     }
-                    BBOSnapshot snapshot{new_bbo, mid, weighted_mid};
+                    size_t time_pos = msg.find("\"time\":");
+                    std::string_view time_content(msg.data() + time_pos + 7,13);
+                    double raw_timestamp_us = std::stod(std::string(time_content)); // Assuming time_content is string of microseconds
+                    double timestamp_sec = raw_timestamp_us / 1000.0;
+                    BBOSnapshot snapshot{new_bbo, mid, weighted_mid,timestamp_sec};
                     disruptor.publish(snapshot);
 }
             }

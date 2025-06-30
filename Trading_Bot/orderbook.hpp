@@ -36,26 +36,37 @@ public:
         }
     }
     double calculate_imbalance_ignore_top() const {
-        double bid_sum = 0.0, ask_sum = 0.0;
+    double bid_sum = 0.0, ask_sum = 0.0;
+    double second_bid_price = 0.0, second_ask_price = 0.0;
 
-        // Skip top bid and sum the rest
-        bool first = true;
-        for (const auto& [price, size] : bids) {
-            if (first) { first = false; continue; }
-            bid_sum += size;
-        }
+    // Skip top bid; track second best bid price
+    bool first = true;
+    size_t bid_level = 0;
+    for (const auto& [price, size] : bids) {
+        if (first) { first = false; continue; }
+        if (bid_level == 0) second_bid_price = price; // first bid after skipping top
+        bid_sum += size;
+        ++bid_level;
+    }
 
-        // Skip top ask and sum the rest
-        first = true;
-        for (const auto& [price, size] : asks) {
-            if (first) { first = false; continue; }
-            ask_sum += size;
-        }
+    // Skip top ask; track second best ask price
+    first = true;
+    size_t ask_level = 0;
+    for (const auto& [price, size] : asks) {
+        if (first) { first = false; continue; }
+        if (ask_level == 0) second_ask_price = price; // first ask after skipping top
+        ask_sum += size;
+        ++ask_level;
+    }
 
-        double total = bid_sum + ask_sum;
-        if (total == 0.0) return 0.5; // neutral imbalance if empty
+    double total = bid_sum + ask_sum;
+    if (total == 0.0 || second_ask_price == 0.0 || second_bid_price == 0.0) {
+        return 0.0; // fallback: unable to compute
+    }
 
-        return bid_sum / total;
+    double imbalance = bid_sum / total;
+    return imbalance * second_ask_price + (1.0 - imbalance) * second_bid_price;
 }
+
 
 };
