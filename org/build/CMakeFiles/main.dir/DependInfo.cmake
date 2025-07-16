@@ -10,6 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/hanifadelekan/dev/Trading-Prod/org/core/networking/resolve_ws.cpp" "CMakeFiles/main.dir/core/networking/resolve_ws.cpp.o" "gcc" "CMakeFiles/main.dir/core/networking/resolve_ws.cpp.o.d"
   "/Users/hanifadelekan/dev/Trading-Prod/org/core/networking/ws_reader.cpp" "CMakeFiles/main.dir/core/networking/ws_reader.cpp.o" "gcc" "CMakeFiles/main.dir/core/networking/ws_reader.cpp.o.d"
+  "/Users/hanifadelekan/dev/Trading-Prod/org/datacentre/control.cpp" "CMakeFiles/main.dir/datacentre/control.cpp.o" "gcc" "CMakeFiles/main.dir/datacentre/control.cpp.o.d"
+  "/Users/hanifadelekan/dev/Trading-Prod/org/datacentre/strat_ctrl.cpp" "CMakeFiles/main.dir/datacentre/strat_ctrl.cpp.o" "gcc" "CMakeFiles/main.dir/datacentre/strat_ctrl.cpp.o.d"
   "/Users/hanifadelekan/dev/Trading-Prod/org/exchanges/hyperliquid/global_atomics.cpp" "CMakeFiles/main.dir/exchanges/hyperliquid/global_atomics.cpp.o" "gcc" "CMakeFiles/main.dir/exchanges/hyperliquid/global_atomics.cpp.o.d"
   "/Users/hanifadelekan/dev/Trading-Prod/org/exchanges/hyperliquid/parsing/hl_parsers.cpp" "CMakeFiles/main.dir/exchanges/hyperliquid/parsing/hl_parsers.cpp.o" "gcc" "CMakeFiles/main.dir/exchanges/hyperliquid/parsing/hl_parsers.cpp.o.d"
   "/Users/hanifadelekan/dev/Trading-Prod/org/exchanges/hyperliquid/streaming/subscription_patterns.cpp" "CMakeFiles/main.dir/exchanges/hyperliquid/streaming/subscription_patterns.cpp.o" "gcc" "CMakeFiles/main.dir/exchanges/hyperliquid/streaming/subscription_patterns.cpp.o.d"

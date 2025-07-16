@@ -16,12 +16,14 @@ void start_async_read(
     const std::string& exchange,
     OrderBook& order_book,
     Disruptor<BBOSnapshot>& bbo_disruptor,
-    Disruptor<OBSnapshot>& ob_disruptor
+    Disruptor<OBSnapshot>& ob_disruptor,
+    HJBData bids,
+    HJBData asks
 ) {
     ws->async_read(
         *buffer,
         [ws, buffer, io_context, exchange,
-         &order_book, &bbo_disruptor, &ob_disruptor]
+         &order_book, &bbo_disruptor, &ob_disruptor,bids,asks]
         (beast::error_code ec, std::size_t bytes_transferred) mutable {
 
             if (ec) {
@@ -32,7 +34,7 @@ void start_async_read(
             std::string msg = beast::buffers_to_string(buffer->data());
 
             if (exchange == "hyperliquid") {
-                hl_parse(msg, order_book, bbo_disruptor, ob_disruptor);
+                hl_parse(msg, order_book, bbo_disruptor, ob_disruptor,bids,asks);
 
             }
 
@@ -43,7 +45,7 @@ void start_async_read(
             // Recursively continue
             start_async_read(
                 ws, buffer, io_context, exchange,
-                order_book, bbo_disruptor, ob_disruptor
+                order_book, bbo_disruptor, ob_disruptor,bids,asks
             );
         }
     );

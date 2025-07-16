@@ -177,6 +177,54 @@ core/networking/ws_reader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/core/networking/ws_reader.cpp.s
 .PHONY : core/networking/ws_reader.cpp.s
 
+datacentre/control.o: datacentre/control.cpp.o
+.PHONY : datacentre/control.o
+
+# target to build an object file
+datacentre/control.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/datacentre/control.cpp.o
+.PHONY : datacentre/control.cpp.o
+
+datacentre/control.i: datacentre/control.cpp.i
+.PHONY : datacentre/control.i
+
+# target to preprocess a source file
+datacentre/control.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/datacentre/control.cpp.i
+.PHONY : datacentre/control.cpp.i
+
+datacentre/control.s: datacentre/control.cpp.s
+.PHONY : datacentre/control.s
+
+# target to generate assembly for a file
+datacentre/control.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/datacentre/control.cpp.s
+.PHONY : datacentre/control.cpp.s
+
+datacentre/strat_ctrl.o: datacentre/strat_ctrl.cpp.o
+.PHONY : datacentre/strat_ctrl.o
+
+# target to build an object file
+datacentre/strat_ctrl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/datacentre/strat_ctrl.cpp.o
+.PHONY : datacentre/strat_ctrl.cpp.o
+
+datacentre/strat_ctrl.i: datacentre/strat_ctrl.cpp.i
+.PHONY : datacentre/strat_ctrl.i
+
+# target to preprocess a source file
+datacentre/strat_ctrl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/datacentre/strat_ctrl.cpp.i
+.PHONY : datacentre/strat_ctrl.cpp.i
+
+datacentre/strat_ctrl.s: datacentre/strat_ctrl.cpp.s
+.PHONY : datacentre/strat_ctrl.s
+
+# target to generate assembly for a file
+datacentre/strat_ctrl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/datacentre/strat_ctrl.cpp.s
+.PHONY : datacentre/strat_ctrl.cpp.s
+
 exchanges/hyperliquid/global_atomics.o: exchanges/hyperliquid/global_atomics.cpp.o
 .PHONY : exchanges/hyperliquid/global_atomics.o
 
@@ -576,6 +624,12 @@ help:
 	@echo "... core/networking/ws_reader.o"
 	@echo "... core/networking/ws_reader.i"
 	@echo "... core/networking/ws_reader.s"
+	@echo "... datacentre/control.o"
+	@echo "... datacentre/control.i"
+	@echo "... datacentre/control.s"
+	@echo "... datacentre/strat_ctrl.o"
+	@echo "... datacentre/strat_ctrl.i"
+	@echo "... datacentre/strat_ctrl.s"
 	@echo "... exchanges/hyperliquid/global_atomics.o"
 	@echo "... exchanges/hyperliquid/global_atomics.i"
 	@echo "... exchanges/hyperliquid/global_atomics.s"

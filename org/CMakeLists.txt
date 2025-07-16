@@ -18,6 +18,8 @@ set(APP_SOURCES
     exchanges/hyperliquid/parsing/hl_parsers.cpp
     exchanges/hyperliquid/streaming/subscription_patterns.cpp
     exchanges/hyperliquid/streaming/threads.cpp
+    datacentre/strat_ctrl.cpp
+    datacentre/control.cpp
 
 )
 
@@ -58,11 +60,14 @@ target_include_directories(main PRIVATE
     ${IMGUI_ROOT_DIR}/backends
     ${IMPLOT_ROOT_DIR}
     ${CMAKE_SOURCE_DIR}
+    ${HDF5_INCLUDE_DIRS}
+
     /opt/homebrew/include
 )
 
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
+find_package(HDF5 REQUIRED COMPONENTS C CXX)
 
 target_link_libraries(main
     glfw
@@ -70,6 +75,8 @@ target_link_libraries(main
     boost_system
     ssl
     crypto
+    ${HDF5_C_LIBRARIES}
+    ${HDF5_CXX_LIBRARIES}
 )
 
 target_compile_definitions(main PRIVATE GL_SILENCE_DEPRECATION)

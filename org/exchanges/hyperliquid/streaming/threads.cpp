@@ -4,6 +4,8 @@
 #include "gui/gui_app.hpp"
 #include "core/networking/websocket_aliases.hpp"
 #include "gui/disruptor.h"
+#include "datacentre/control.hpp"
+
 void StartMarketDataStreams(GuiApp* app,const std::string& exchange) {
 
 
@@ -21,7 +23,8 @@ void StartMarketDataStreams(GuiApp* app,const std::string& exchange) {
             port = "443";
             target = "/ws";
             subscribe_fn = [](std::shared_ptr<WebSocketType> ws, const std::string& msg, beast::error_code& ec) {
-    hyperliquid_subscribe(msg, ws, ec);  // Your actual function signature
+        hyperliquid_subscribe(msg, ws, ec);  // Your actual function signature
+        
 };
 
         } 
@@ -41,6 +44,8 @@ void StartMarketDataStreams(GuiApp* app,const std::string& exchange) {
 
         beast::error_code ec;
         subscribe_fn(ws, "SOL", ec);  // Use appropriate subscription function
+        HJBData bids = load_hjb_solution("/Users/hanifadelekan/dev/Trading-Prod/org/datacentre/hjb_solution.h5","bid_half");
+        HJBData asks = load_hjb_solution("/Users/hanifadelekan/dev/Trading-Prod/org/datacentre/hjb_solution.h5","ask_half");
         if (ec) {
             std::cerr << "Subscription failed: " << ec.message() << "\n";
             return;
@@ -49,7 +54,7 @@ void StartMarketDataStreams(GuiApp* app,const std::string& exchange) {
         start_async_read(
             ws, buffer, app->shared_io_context_,"hyperliquid",
              app->order_book_,
-            app->disruptor_, app->obdisruptor_
+            app->disruptor_, app->obdisruptor_,bids,asks
         );
 
         app->shared_io_context_->run();

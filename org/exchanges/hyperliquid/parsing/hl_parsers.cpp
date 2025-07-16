@@ -6,6 +6,8 @@
 #include "exchanges/hyperliquid/global_atomics.hpp"
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include "datacentre/strat_ctrl.hpp"
+#include "datacentre/control.hpp"
 
 bool parse_bbo(const std::string& msg,
                Disruptor<BBOSnapshot>& disruptor)
@@ -114,6 +116,12 @@ bool parse_orderbook(const std::string& msg,
             obrec.bid2 = imbalance_data[2];
             obrec.ask1 = imbalance_data[3];
             obrec.ask2 = imbalance_data[4];
+            double bid = imbalance_data[1];
+            double ask = imbalance_data[2];
+            double midprice = ( bid + ask)/2;
+            imbalance = ((imbalance * bid)+((1 - imbalance)* ask));
+            std::pair<double,double> quotes = getQuotes(imbalance,midprice);
+            sendOrders(quotes);
 
             std::ofstream fout("/Users/hanifadelekan/dev/Trading-Prod/Trading_Bot/ob.bin", std::ios::binary | std::ios::app);
             fout.write(reinterpret_cast<const char*>(&obrec), sizeof(OBRecord));
@@ -156,7 +164,9 @@ bool parse_trades(const std::string& msg) {
 bool hl_parse(const std::string& msg,
               OrderBook& order_book,
               Disruptor<BBOSnapshot>& bbo_disruptor,
-              Disruptor<OBSnapshot>& ob_disruptor)
+              Disruptor<OBSnapshot>& ob_disruptor,
+              HJBData bids,
+              HJBData asks)
 {
     bool parsed = false;
     HyperliquidOBParser ob_parser;
@@ -181,11 +191,19 @@ bool hl_parse(const std::string& msg,
         if (msg.find("\"trades\"") != std::string::npos) {
             parsed |= parse_trades(msg);
         }
-
+        double z = atomic_bbo_imbalance.load();
+        double midprice = atomic_bbo_midprice.load();
+        z = (z - midprice) * 10;
+        double q = 4;
+        double vol = 0.01;
+        double bid = phi_at(bids,q,z,vol);
+        double ask = phi_at(asks,q,z,vol);
+        std::cout << "ask : "<< midprice - bid << "\n" << "midprice : " << midprice << "\n" << "bid : " << midprice + ask << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "[HL Parse] General error: " << e.what() << "\n";
         return false;
     }
+
 
     return parsed;
 }

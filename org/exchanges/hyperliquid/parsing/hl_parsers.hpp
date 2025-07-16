@@ -3,7 +3,7 @@
 #include "gui/orderbook.hpp"
 #include "gui/bbo.hpp"
 #include <string>
-
+#include "datacentre/control.hpp"
 bool parse_orderbook(const std::string& msg,
                      OrderBook& order_book,
                      Disruptor<OBSnapshot>& obdisruptor);
@@ -17,4 +17,6 @@ bool parse_bbo(const std::string& msg,
 bool hl_parse(const std::string& msg,
               OrderBook& order_book,
               Disruptor<BBOSnapshot>& bbo_disruptor,
-              Disruptor<OBSnapshot>& ob_disruptor);
+              Disruptor<OBSnapshot>& ob_disruptor,
+              HJBData bids,
+              HJBData asks);

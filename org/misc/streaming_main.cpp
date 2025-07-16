@@ -1,6 +1,7 @@
 #include "streaming_main.hpp"
 #include "ws_reader.hpp"
 #include "resolve_ws.hpp"
+
 void start_hyperliquid_stream(
     std::shared_ptr<net::io_context> io_context,
     ssl::context& ssl_ctx,
@@ -22,6 +23,7 @@ void start_hyperliquid_stream(
 
     auto buffer = std::make_shared<beast::flat_buffer>();
     hyperliquid_subscribe(ws, symbol, ec);
+
     if (ec) {
         std::cerr << "Subscription failed: " << ec.message() << std::endl;
         return;
