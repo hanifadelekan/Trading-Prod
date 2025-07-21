@@ -7,7 +7,7 @@ import threading
 COMMAND_TO_RUN = [
     os.path.expanduser("~/hl-visor"), # Expands ~ to the user's home directory
     "run-non-validator",
-    #"--write-raw-book-diffs",
+    "--write-raw-book-diffs",
     "--disable-output-file-buffering"
 ]
 
