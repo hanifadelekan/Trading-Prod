@@ -48,10 +48,11 @@ int main(int argc, char* argv[]) {
         // Try reading a line
         if (std::getline(file, line)) {
             if (!printed_header) {
-                std::cout << "\n--- New content in " << filepath << " ---\n";
+                //std::cout << "\n--- New content in " << filepath << " ---\n";
                 printed_header = true;
             }
-            std::cout << line << std::endl;
+            //std::cout << line << std::endl;
+            
             last_pos = file.tellg();
         } else {
             // No new line available
