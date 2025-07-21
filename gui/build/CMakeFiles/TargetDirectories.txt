@@ -1,0 +1,3 @@
+/Users/hanifadelekan/dev/Trading-Prod/gui/build/CMakeFiles/main.dir
+/Users/hanifadelekan/dev/Trading-Prod/gui/build/CMakeFiles/edit_cache.dir
+/Users/hanifadelekan/dev/Trading-Prod/gui/build/CMakeFiles/rebuild_cache.dir

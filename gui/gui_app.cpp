@@ -5,7 +5,7 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <iostream>
 #include <nlohmann/json.hpp>
-
+#include <GLFW/glfw3.h>
 // Use nlohmann::json for easier JSON manipulation
 using json = nlohmann::json;
 

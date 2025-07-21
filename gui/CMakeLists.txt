@@ -9,17 +9,10 @@ set(IMGUI_ROOT_DIR ${CMAKE_SOURCE_DIR}/third_party/imgui)
 set(IMPLOT_ROOT_DIR ${CMAKE_SOURCE_DIR}/third_party/implot)
 
 set(APP_SOURCES
-    main.cpp
-    gui/imgui_bbo_viewer.cpp
-    core/networking/resolve_ws.cpp
-    core/networking/ws_reader.cpp        # NEW: your orderbook feed
-    gui/gui_app.cpp
-    exchanges/hyperliquid/global_atomics.cpp
-    exchanges/hyperliquid/parsing/hl_parsers.cpp
-    exchanges/hyperliquid/streaming/subscription_patterns.cpp
-    exchanges/hyperliquid/streaming/threads.cpp
-    datacentre/strat_ctrl.cpp
-    datacentre/control.cpp
+    gui_main.cpp
+    imgui_bbo_viewer.cpp
+    gui_app.cpp
+    websocket_receivers.cpp
 
 )
 

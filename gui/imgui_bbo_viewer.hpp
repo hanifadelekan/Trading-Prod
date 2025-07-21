@@ -4,8 +4,24 @@
 #include <deque>
 #include <vector>
 #include <mutex>
-#include "bbo.hpp"      // Definition for BBOSnapshot
-#include "obook.hpp"    // Definition for OBSnapshot
+
+
+struct BBOLevel {
+    double price;
+    double size;
+    int num_orders;
+    bool is_bid;  // true=bid, false=ask
+};
+struct BBOSnapshot {
+    std::vector<BBOLevel> levels;
+    double midprice;
+    double weighted_midprice;
+    double timestamp;
+};
+struct OBSnapshot {
+    double imb;
+    double timestamp;
+};
 
 // Forward-declare GLFWwindow to avoid including the GLFW header here.
 struct GLFWwindow;
