@@ -1,69 +1,43 @@
-#pragma once
+#ifndef IMGUI_BBO_VIEWER_HPP
+#define IMGUI_BBO_VIEWER_HPP
 
 #include <deque>
 #include <vector>
-#include <memory>
-#include <GLFW/glfw3.h>  // For GLFWwindow
-#include "disruptor.h"
-#include "orderbook.hpp"
-#include "obook.hpp"
-#include "bbo.hpp"
+#include <mutex>
+#include "bbo.hpp"      // Definition for BBOSnapshot
+#include "obook.hpp"    // Definition for OBSnapshot
+
+// Forward-declare GLFWwindow to avoid including the GLFW header here.
+struct GLFWwindow;
+
 class ImGuiBBOViewer {
 public:
-    ImGuiBBOViewer(GLFWwindow* window,
-                   Disruptor<BBOSnapshot>& disruptor,
-                   Disruptor<OBSnapshot>& obdisruptor);
+    // --- Constructor & Destructor ---
+    ImGuiBBOViewer();
+    ~ImGuiBBOViewer() = default;
 
+    // --- Public Data Input Methods ---
+    void OnBBODataReceived(const BBOSnapshot& snapshot);
+    void OnImbalanceDataReceived(const OBSnapshot& snapshot);
+
+    // --- Main Render Method ---
     void RenderFrame(double dir);
 
 private:
-    // Update helpers
-    void AddToHistory(double mid);
-    void AddToHistoryBBOMid(double bbo_mid);
-    void AddToHistoryImb(double imb);
+    // --- Thread Safety ---
+    std::mutex data_mutex_; // Mutex to protect access to the deques
 
-    // Convert deque to fixed-size raw buffer
-    const double* midprice_history_data();
-    const double* bbo_midprice_history_data();
-    const double* imb_history_data();
-    const double* bbo_time_history_data();
-    const double* imb_time_history_data();
-
-private:
-    // Disruptors
-    Disruptor<BBOSnapshot>& disruptor_;
-    Disruptor<OBSnapshot>& obdisruptor_;
-    uint64_t bbo_cursor_;
-    uint64_t imb_cursor_;
-
-    // GUI
-    GLFWwindow* window_;
-
-    // History deques
+    // --- Data Storage (History) ---
     std::deque<double> midprice_history_;
     std::deque<double> bbo_midprice_history_;
     std::deque<double> imb_history_;
     std::deque<double> bbo_timestamp_history_;
     std::deque<double> imb_timestamp_history_;
 
-    // Buffers for plotting
-    std::vector<double> midprice_buffer_;
-    std::vector<double> bbo_midprice_buffer_;
-    std::vector<double> imb_buffer_;
-    std::vector<double> bbo_timestamp_buffer_;
-    std::vector<double> imb_timestamp_buffer_;
-
-    // State tracking
-    BBOSnapshot latest_snapshot_;
-    OBSnapshot latest_imb_snapshot_;
-    double last_sample_time_;
-    double last_update_time_;
-    bool has_new_data_;
-
-    double latest_mid_;
-    double latest_bbo_mid_;
-    double latest_imb_;
+    // --- Latest Data Cache ---
+    double latest_mid_ = 0.0;
+    double latest_bbo_mid_ = 0.0;
+    double latest_imb_ = 0.0;
 };
 
-// Timestamp formatter function for ImPlot
-int MyTimeFormatter(double value, char* buff, int size, void*);
+#endif // IMGUI_BBO_VIEWER_HPP
