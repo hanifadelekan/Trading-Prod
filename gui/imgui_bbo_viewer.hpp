@@ -4,24 +4,7 @@
 #include <deque>
 #include <vector>
 #include <mutex>
-
-
-struct BBOLevel {
-    double price;
-    double size;
-    int num_orders;
-    bool is_bid;  // true=bid, false=ask
-};
-struct BBOSnapshot {
-    std::vector<BBOLevel> levels;
-    double midprice;
-    double weighted_midprice;
-    double timestamp;
-};
-struct OBSnapshot {
-    double imb;
-    double timestamp;
-};
+#include <nlohmann/json.hpp> // Include JSON header
 
 // Forward-declare GLFWwindow to avoid including the GLFW header here.
 struct GLFWwindow;
@@ -33,8 +16,8 @@ public:
     ~ImGuiBBOViewer() = default;
 
     // --- Public Data Input Methods ---
-    void OnBBODataReceived(const BBOSnapshot& snapshot);
-    void OnImbalanceDataReceived(const OBSnapshot& snapshot);
+    // This single method now accepts a json object directly.
+    void OnDataReceived(const nlohmann::json& message);
 
     // --- Main Render Method ---
     void RenderFrame(double dir);

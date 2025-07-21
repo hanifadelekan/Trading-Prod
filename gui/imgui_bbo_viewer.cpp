@@ -6,6 +6,9 @@
 #include <deque>
 #include <ctime>
 #include <imgui.h> // Required for ImGui::GetIO()
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 // ===================================================================================
 //
@@ -27,25 +30,41 @@ ImGuiBBOViewer::ImGuiBBOViewer() {
 // ===================================================================================
 
 /**
- * @brief Public method to feed new BBO data into the viewer.
+ * @brief Public method to feed new data into the viewer from a single JSON object.
+ * This should be called from your WebSocket client thread.
+ * @param message The new data snapshot as a JSON object, containing all fields.
  */
-void ImGuiBBOViewer::OnBBODataReceived(const BBOSnapshot& snapshot) {
-    std::lock_guard<std::mutex> lock(data_mutex_);
-    midprice_history_.push_back(snapshot.midprice);
-    bbo_midprice_history_.push_back(snapshot.weighted_midprice);
-    bbo_timestamp_history_.push_back(snapshot.timestamp);
-    latest_mid_ = snapshot.midprice;
-    latest_bbo_mid_ = snapshot.weighted_midprice;
-}
+void ImGuiBBOViewer::OnDataReceived(const json& message) {
+    try {
+        // Lock the mutex for thread-safe access to the data deques
+        std::lock_guard<std::mutex> lock(data_mutex_);
 
-/**
- * @brief Public method to feed new order book imbalance data into the viewer.
- */
-void ImGuiBBOViewer::OnImbalanceDataReceived(const OBSnapshot& snapshot) {
-    std::lock_guard<std::mutex> lock(data_mutex_);
-    imb_history_.push_back(snapshot.imb);
-    imb_timestamp_history_.push_back(snapshot.timestamp);
-    latest_imb_ = snapshot.imb;
+        // Extract all values from the single JSON object.
+        // The .at() method will throw an exception if a key is missing.
+        double timestamp = message.at("timestamp");
+        double midprice = message.at("midprice");
+        double weighted_midprice = message.at("weighted_midprice");
+        double imb = message.at("imb");
+
+        // Push new data points to their respective history deques
+        midprice_history_.push_back(midprice);
+        bbo_midprice_history_.push_back(weighted_midprice);
+        imb_history_.push_back(imb);
+
+        // Both timestamp deques get the same shared timestamp value
+        bbo_timestamp_history_.push_back(timestamp);
+        imb_timestamp_history_.push_back(timestamp);
+
+        // Cache the latest values
+        latest_mid_ = midprice;
+        latest_bbo_mid_ = weighted_midprice;
+        latest_imb_ = imb;
+
+    } catch (const json::exception& e) {
+        // Silently ignore messages that are missing required fields.
+        // For debugging, you could log the error:
+        // std::cerr << "[Viewer] JSON data error: " << e.what() << std::endl;
+    }
 }
 
 // ===================================================================================
@@ -99,6 +118,7 @@ void ImGuiBBOViewer::RenderFrame(double dir) {
         while (midprice_history_.size() > ROLLING_WINDOW) midprice_history_.pop_front();
         while (bbo_midprice_history_.size() > ROLLING_WINDOW) bbo_midprice_history_.pop_front();
         while (imb_history_.size() > ROLLING_WINDOW) imb_history_.pop_front();
+        // Since timestamps are shared, we only need to trim one of them
         while (bbo_timestamp_history_.size() > ROLLING_WINDOW) bbo_timestamp_history_.pop_front();
         while (imb_timestamp_history_.size() > ROLLING_WINDOW) imb_timestamp_history_.pop_front();
 
@@ -114,9 +134,6 @@ void ImGuiBBOViewer::RenderFrame(double dir) {
             double latest_timestamp = 0.0;
             if (!bbo_timestamp_history_.empty()) {
                 latest_timestamp = bbo_timestamp_history_.back();
-            }
-            if (!imb_timestamp_history_.empty()) {
-                latest_timestamp = std::max(latest_timestamp, imb_timestamp_history_.back());
             }
             
             const double VISIBLE_TIME_WINDOW_SEC = 60.0;

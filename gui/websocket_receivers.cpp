@@ -1,8 +1,7 @@
-#include "imgui_bbo_viewer.hpp"
+#include "websocket_receivers.hpp"
+#include <boost/beast/core.hpp>
 #include <iostream>
 #include <nlohmann/json.hpp>
-#include "websocket_receivers.hpp"
-#include <boost/beast/core.hpp> 
 
 using json = nlohmann::json;
 
@@ -117,28 +116,15 @@ void WebSocketReceiver::Listen() {
 }
 
 /**
- * @brief Parses an incoming JSON message and updates the viewer.
+ * @brief Parses an incoming JSON message and passes it to the viewer.
  */
 void WebSocketReceiver::ParseMessage(const std::string& message) {
     try {
+        // Parse the string into a JSON object
         auto j = json::parse(message);
-        std::string type = j.at("type");
-
-        if (type == "bbo") {
-            BBOSnapshot snapshot;
-            snapshot.timestamp = j.at("timestamp");
-            snapshot.midprice = j.at("midprice");
-            snapshot.weighted_midprice = j.at("weighted_midprice");
-            // Pass the data to the viewer
-            viewer_.OnBBODataReceived(snapshot);
-
-        } else if (type == "imbalance") {
-            OBSnapshot snapshot;
-            snapshot.timestamp = j.at("timestamp");
-            snapshot.imb = j.at("imb");
-            // Pass the data to the viewer
-            viewer_.OnImbalanceDataReceived(snapshot);
-        }
+        
+        // Pass the raw JSON object directly to the viewer
+        viewer_.OnDataReceived(j);
 
     } catch (const json::exception& e) {
         std::cerr << "[WebSocket] JSON parse error: " << e.what() << std::endl;
