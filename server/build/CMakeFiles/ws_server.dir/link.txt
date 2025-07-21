@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/ws_server.dir/server_ws.cpp.o -o ws_server  libusockets.a -luWS -lpthread -lssl -lcrypto -lz 
