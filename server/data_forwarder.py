@@ -1,6 +1,7 @@
 import subprocess
 import os
 import sys
+import threading
 
 # The command you run in your terminal, broken into a list
 COMMAND_TO_RUN = [
@@ -10,10 +11,19 @@ COMMAND_TO_RUN = [
     "--disable-output-file-buffering"
 ]
 
+def stream_reader(stream, prefix):
+    """
+    Reads lines from a stream and prints them with a prefix.
+    This function is designed to be run in a separate thread.
+    """
+    for line in iter(stream.readline, ''):
+        print(f"[{prefix}] {line.strip()}")
+    stream.close()
+
 def main():
     """
-    Runs the specified binary as a subprocess, captures its output via a pipe,
-    and prints it to the screen in real-time.
+    Runs the specified binary as a subprocess, captures its output and error streams
+    in separate threads, and prints everything to the screen in real-time.
     """
     print(f"[Wrapper] Starting command: {' '.join(COMMAND_TO_RUN)}")
     
@@ -31,20 +41,29 @@ def main():
             bufsize=1 
         )
 
-        # Use iter() to read from the process's stdout line by line until it closes.
-        # This is a blocking call, but it yields a line as soon as it's available.
-        for line in iter(process.stdout.readline, ''):
-            # Print the captured output to this script's stdout.
-            # .strip() removes leading/trailing whitespace, including the newline character.
-            print(line.strip())
+        # Create and start a thread to read from the subprocess's stdout
+        stdout_thread = threading.Thread(
+            target=stream_reader, 
+            args=(process.stdout, "DATA") # "DATA" prefix for standard output
+        )
+        stdout_thread.daemon = True
+        stdout_thread.start()
 
-        # After the main loop finishes, check for any error output.
-        stderr_output = process.stderr.read()
-        if stderr_output:
-            print(f"\n[Wrapper] Error output from subprocess:\n{stderr_output.strip()}", file=sys.stderr)
+        # Create and start another thread to read from the subprocess's stderr
+        stderr_thread = threading.Thread(
+            target=stream_reader, 
+            args=(process.stderr, "LOG") # "LOG" prefix for error output
+        )
+        stderr_thread.daemon = True
+        stderr_thread.start()
 
-        # Wait for the process to terminate and get its exit code.
+        # Wait for the process to terminate. The threads will exit automatically.
         process.wait()
+        
+        # Wait for the reader threads to finish processing any remaining output
+        stdout_thread.join()
+        stderr_thread.join()
+
         print(f"\n[Wrapper] Subprocess finished with exit code: {process.returncode}")
 
     except FileNotFoundError:
