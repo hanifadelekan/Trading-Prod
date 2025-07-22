@@ -5,6 +5,8 @@
 #include <atomic>
 #include <limits>
 #include <iomanip> // For std::setprecision
+#include <thread>  // Required for std::this_thread
+#include <chrono>  // Required for std::chrono
 #include "nlohmann/json.hpp" // Include the nlohmann JSON library
 
 // Use the nlohmann::json namespace for convenience
