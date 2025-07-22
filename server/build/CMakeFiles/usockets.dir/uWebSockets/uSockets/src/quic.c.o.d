@@ -1,3 +1,2 @@
 CMakeFiles/usockets.dir/uWebSockets/uSockets/src/quic.c.o: \
- /home/hyperliquid_user/uWebSockets/uSockets/src/quic.c \
- /usr/include/stdc-predef.h
+  /Users/hanifadelekan/dev/Trading-Prod/server/uWebSockets/uSockets/src/quic.c

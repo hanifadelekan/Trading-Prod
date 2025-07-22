@@ -4,135 +4,142 @@
 #include <csignal>
 #include <atomic>
 #include <limits>
-#include <iomanip> // For std::setprecision
-#include <thread>  // Required for std::this_thread
-#include <chrono>  // Required for std::chrono
-#include "nlohmann/json.hpp" // Include the nlohmann JSON library
+#include <iomanip>
+#include <thread>
+#include <chrono>
+#include <mutex>
+#include <vector>
+#include "uWS.h"
+#include "nlohmann/json.hpp"
 
-// Use the nlohmann::json namespace for convenience
+// Use namespaces for convenience
 using json = nlohmann::json;
 
-// Global flag to control the main loop, allowing graceful shutdown
+// --- Global Variables ---
+
+// Atomic flag for graceful shutdown across threads
 std::atomic<bool> keep_running(true);
 
-// Signal handler for Ctrl+C (SIGINT) and termination signals (SIGTERM)
-void signal_handler(int signal) {
-    if (signal == SIGINT || signal == SIGTERM) {
-        keep_running = false;
-        std::cerr << "\n[Monitor] Shutdown signal received. Exiting gracefully...\n";
-    }
-}
+// WebSocket server group to manage all connected clients
+uWS::Group<uWS::SERVER>* ws_group = nullptr;
+std::mutex ws_mutex; // Mutex to protect access to the ws_group
+
+// --- Function Declarations ---
+void signal_handler(int signal);
+void file_monitor_thread(const std::string& filepath);
+
+// --- Main Application ---
 
 int main(int argc, char* argv[]) {
-    // Disable buffering to ensure immediate output
-    std::setvbuf(stdout, nullptr, _IONBF, 0);
-    std::cout << std::unitbuf;
-
     // Check for correct command-line arguments
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <filepath>\n";
+        std::cerr << "Usage: " << argv[0] << " <filepath_to_monitor>\n";
         return 1;
     }
-
     const std::string filepath = argv[1];
+    const int port = 9002;
 
     // Register signal handlers for graceful shutdown
     std::signal(SIGINT, signal_handler);
     std::signal(SIGTERM, signal_handler);
 
-    // Open the file for reading
-    std::ifstream file(filepath);
-    if (!file) {
-        std::cerr << "[Monitor] Error opening file: " << filepath << std::endl;
+    // --- WebSocket Server Setup ---
+    uWS::Hub hub;
+    ws_group = hub.createGroup<uWS::SERVER>();
+
+    ws_group->onConnection([](uWS::WebSocket<uWS::SERVER>* ws, uWS::HttpRequest req) {
+        std::cout << "[Server] Client connected." << std::endl;
+    });
+
+    ws_group->onDisconnection([](uWS::WebSocket<uWS::SERVER>* ws, int code, char* message, size_t length) {
+        std::cout << "[Server] Client disconnected." << std::endl;
+    });
+
+    // We don't need an onMessage handler as this server only broadcasts data
+    ws_group->onMessage([](uWS::WebSocket<uWS::SERVER>* ws, char* message, size_t length, uWS::OpCode opCode) {});
+
+    if (!hub.listen(port)) {
+        std::cerr << "[Server] Failed to listen on port " << port << std::endl;
         return 1;
     }
 
-    std::cout << "[Monitor] Watching: " << filepath << std::endl;
+    // --- Start File Monitoring in a Background Thread ---
+    std::thread monitor_thread(file_monitor_thread, filepath);
 
-    // Initialize variables to track the best bid and ask
-    double highest_bid = 0.0;
-    double lowest_ask = std::numeric_limits<double>::max();
+    std::cout << "[Server] WebSocket server listening on port " << port << std::endl;
+    std::cout << "[Monitor] Watching file: " << filepath << std::endl;
 
-    // Set precision for floating-point output
-    std::cout << std::fixed << std::setprecision(4);
+    // --- Run the WebSocket Event Loop (this is a blocking call) ---
+    hub.run();
+
+    // --- Cleanup ---
+    // This part will be reached after hub.run() exits (e.g., on signal)
+    std::cout << "[Server] Shutting down..." << std::endl;
+    keep_running = false; // Signal the monitor thread to stop
+    monitor_thread.join(); // Wait for the monitor thread to finish cleanly
+
+    return 0;
+}
+
+// --- Signal Handler Implementation ---
+
+void signal_handler(int signal) {
+    if (signal == SIGINT || signal == SIGTERM) {
+        if (keep_running) {
+            std::cerr << "\n[Main] Shutdown signal received. Exiting gracefully...\n";
+            keep_running = false;
+            // You might need a way to gracefully stop the hub if it's running
+        }
+    }
+}
+
+// --- File Monitoring Thread Implementation ---
+
+void file_monitor_thread(const std::string& filepath) {
+    // Disable buffering for immediate output in this thread
+    std::setvbuf(stdout, nullptr, _IONBF, 0);
+    std::cout << std::unitbuf;
+
+    std::ifstream file(filepath);
+    if (!file) {
+        std::cerr << "[Monitor] Error opening file: " << filepath << std::endl;
+        keep_running = false;
+        return;
+    }
 
     // Main loop to read and process the file
     while (keep_running) {
         std::string line;
-
-        // Try reading a new line from the file
         if (std::getline(file, line)) {
-            if (line.empty()) {
-                continue; // Skip empty lines
-            }
+            if (line.empty()) continue;
 
             try {
                 // Parse the line as a JSON object
                 json data = json::parse(line);
 
-                // --- Extract required fields ---
-                std::string side = data["side"];
-                double price = std::stod(data["px"].get<std::string>());
-                
-                std::string action = "unknown";
-                double size = 0.0;
-
-                // The 'raw_book_diff' object contains the action type ('new', 'modify', 'delete')
-                if (data.contains("raw_book_diff")) {
-                    json diff = data["raw_book_diff"];
-                    if (diff.contains("new")) {
-                        action = "new";
-                        size = std::stod(diff["new"]["sz"].get<std::string>());
-                    } else if (diff.contains("modify")) {
-                        action = "modify";
-                        size = std::stod(diff["modify"]["sz"].get<std::string>());
-                    } else if (diff.contains("delete")) {
-                        action = "delete";
-                        // Size might not be present in a delete action, default to 0
-                        if (diff["delete"].contains("sz")) {
-                           size = std::stod(diff["delete"]["sz"].get<std::string>());
-                        }
-                    }
-                }
-                
-                // --- Print the parsed data ---
-                std::cout << "[ACTION]: " << action 
-                          << " | [SIDE]: " << side 
-                          << " | [PRICE]: " << price 
-                          << " | [SIZE]: " << size << std::endl;
-
-                // --- Update and track the highest bid and lowest ask ---
-                if (side == "Bid") {
-                    if (price > highest_bid) {
-                        highest_bid = price;
-                        std::cout << "  -> New Highest Bid: " << highest_bid << std::endl;
-                    }
-                } else if (side == "Ask") {
-                    if (price < lowest_ask) {
-                        lowest_ask = price;
-                        std::cout << "  -> New Lowest Ask: " << lowest_ask << std::endl;
+                // For HFT, we just forward the raw JSON line.
+                // The client GUI will be responsible for parsing and displaying.
+                {
+                    std::lock_guard<std::mutex> lock(ws_mutex);
+                    if (ws_group) {
+                        ws_group->broadcast(line.c_str(), line.length(), uWS::OpCode::TEXT);
                     }
                 }
 
             } catch (const json::parse_error& e) {
-                // This will catch lines that are not valid JSON
-                // std::cerr << "[Monitor] JSON parse error: " << e.what() << " on line: " << line << std::endl;
+                // Silently ignore non-JSON lines (e.g., logs, status messages)
             } catch (const std::exception& e) {
-                // This will catch other errors, e.g., missing keys or conversion errors
-                // std::cerr << "[Monitor] Data processing error: " << e.what() << " on line: " << line << std::endl;
+                std::cerr << "[Monitor] Data processing error: " << e.what() << std::endl;
             }
-
         } else {
-            // No new line available, check for end-of-file
             if (file.eof()) {
                 file.clear(); // Clear EOF flag to allow further reads
             }
-            // A short sleep to prevent the loop from spinning too fast and using 100% CPU
-            // when there's no new data.
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            // Sleep briefly to prevent high CPU usage when no new data is available
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
 
     file.close();
-    return 0;
+    std::cout << "[Monitor] File monitoring thread finished." << std::endl;
 }

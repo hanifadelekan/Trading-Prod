@@ -1,145 +1,252 @@
 CMakeFiles/usockets.dir/uWebSockets/uSockets/src/crypto/openssl.c.o: \
- /home/hyperliquid_user/uWebSockets/uSockets/src/crypto/openssl.c \
- /usr/include/stdc-predef.h \
- /home/hyperliquid_user/uWebSockets/uSockets/src/libusockets.h \
- /home/hyperliquid_user/uWebSockets/uSockets/src/internal/internal.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdalign.h \
- /home/hyperliquid_user/uWebSockets/uSockets/src/internal/networking/bsd.h \
- /usr/include/x86_64-linux-gnu/sys/socket.h /usr/include/features.h \
- /usr/include/features-time64.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/bits/timesize.h \
- /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/long-double.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
- /usr/include/x86_64-linux-gnu/bits/socket.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/time64.h \
- /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endianness.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
- /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
- /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
- /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
- /usr/include/x86_64-linux-gnu/bits/socket_type.h \
- /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
- /usr/include/x86_64-linux-gnu/asm/socket.h \
- /usr/include/asm-generic/socket.h /usr/include/linux/posix_types.h \
- /usr/include/linux/stddef.h \
- /usr/include/x86_64-linux-gnu/asm/posix_types.h \
- /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
- /usr/include/asm-generic/posix_types.h \
- /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
- /usr/include/asm-generic/bitsperlong.h \
- /usr/include/x86_64-linux-gnu/asm/sockios.h \
- /usr/include/asm-generic/sockios.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /home/hyperliquid_user/uWebSockets/uSockets/src/internal/eventing/epoll_kqueue.h \
- /home/hyperliquid_user/uWebSockets/uSockets/src/internal/loop_data.h \
- /usr/include/x86_64-linux-gnu/sys/epoll.h \
- /usr/include/x86_64-linux-gnu/bits/epoll.h \
- /usr/include/x86_64-linux-gnu/sys/timerfd.h /usr/include/time.h \
- /usr/include/x86_64-linux-gnu/bits/time.h \
- /usr/include/x86_64-linux-gnu/bits/timex.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/timerfd.h \
- /usr/include/x86_64-linux-gnu/sys/eventfd.h \
- /usr/include/x86_64-linux-gnu/bits/eventfd.h /usr/include/string.h \
- /usr/include/strings.h /usr/include/openssl/ssl.h \
- /usr/include/openssl/macros.h \
- /usr/include/x86_64-linux-gnu/openssl/opensslconf.h \
- /usr/include/x86_64-linux-gnu/openssl/configuration.h \
- /usr/include/openssl/opensslv.h /usr/include/openssl/e_os2.h \
- /usr/include/inttypes.h /usr/include/openssl/comp.h \
- /usr/include/openssl/crypto.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h /usr/include/stdio.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
- /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/openssl/safestack.h /usr/include/openssl/stack.h \
- /usr/include/openssl/types.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
- /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
- /usr/include/x86_64-linux-gnu/bits/local_lim.h \
- /usr/include/linux/limits.h \
- /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
- /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
- /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
- /usr/include/x86_64-linux-gnu/bits/uio_lim.h \
- /usr/include/openssl/cryptoerr.h /usr/include/openssl/symhacks.h \
- /usr/include/openssl/cryptoerr_legacy.h /usr/include/openssl/core.h \
- /usr/include/pthread.h /usr/include/sched.h \
- /usr/include/x86_64-linux-gnu/bits/sched.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
- /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
- /usr/include/openssl/comperr.h /usr/include/openssl/bio.h \
- /usr/include/openssl/bioerr.h /usr/include/openssl/x509.h \
- /usr/include/openssl/buffer.h /usr/include/openssl/buffererr.h \
- /usr/include/openssl/evp.h /usr/include/openssl/core_dispatch.h \
- /usr/include/openssl/evperr.h /usr/include/openssl/params.h \
- /usr/include/openssl/bn.h /usr/include/openssl/bnerr.h \
- /usr/include/openssl/objects.h /usr/include/openssl/obj_mac.h \
- /usr/include/openssl/asn1.h /usr/include/openssl/asn1err.h \
- /usr/include/openssl/objectserr.h /usr/include/openssl/ec.h \
- /usr/include/openssl/ecerr.h /usr/include/openssl/rsa.h \
- /usr/include/openssl/rsaerr.h /usr/include/openssl/dsa.h \
- /usr/include/openssl/dh.h /usr/include/openssl/dherr.h \
- /usr/include/openssl/dsaerr.h /usr/include/openssl/sha.h \
- /usr/include/openssl/x509err.h /usr/include/openssl/x509_vfy.h \
- /usr/include/openssl/lhash.h /usr/include/openssl/pkcs7.h \
- /usr/include/openssl/pkcs7err.h /usr/include/openssl/http.h \
- /usr/include/openssl/conf.h /usr/include/openssl/conferr.h \
- /usr/include/openssl/conftypes.h /usr/include/openssl/pem.h \
- /usr/include/openssl/pemerr.h /usr/include/openssl/hmac.h \
- /usr/include/openssl/async.h /usr/include/openssl/asyncerr.h \
- /usr/include/openssl/ct.h /usr/include/openssl/cterr.h \
- /usr/include/openssl/sslerr.h /usr/include/openssl/sslerr_legacy.h \
- /usr/include/openssl/prov_ssl.h /usr/include/openssl/ssl2.h \
- /usr/include/openssl/ssl3.h /usr/include/openssl/tls1.h \
- /usr/include/openssl/dtls1.h /usr/include/openssl/srtp.h \
- /usr/include/openssl/err.h /usr/include/errno.h \
- /usr/include/x86_64-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
- /usr/include/x86_64-linux-gnu/asm/errno.h \
- /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- /usr/include/x86_64-linux-gnu/bits/types/error_t.h
+  /Users/hanifadelekan/dev/Trading-Prod/server/uWebSockets/uSockets/src/crypto/openssl.c \
+  /Users/hanifadelekan/dev/Trading-Prod/server/uWebSockets/uSockets/src/libusockets.h \
+  /Users/hanifadelekan/dev/Trading-Prod/server/uWebSockets/uSockets/src/internal/internal.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdalign.h \
+  /Users/hanifadelekan/dev/Trading-Prod/server/uWebSockets/uSockets/src/internal/networking/bsd.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/socket.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/appleapiopts.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/cdefs.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_symbol_aliasing.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_posix_availability.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_int8_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_int16_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_int32_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_int64_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int8_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int16_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int32_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int64_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_intptr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_uintptr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/endian.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/endian.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_endian.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/_endian.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_endian.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/__endian.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/_OSByteOrder.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/arm/_OSByteOrder.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_char.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_short.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_caddr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_dev_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_blkcnt_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_blksize_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_gid_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_in_addr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_in_port_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_ino_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_ino64_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_key_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_mode_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_nlink_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_id_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_pid_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_off_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_uid_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_clock_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_size_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_ssize_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_time_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_useconds_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_suseconds_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_rsize_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_errno_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_def.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_setsize.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_set.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_clr.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_zero.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_isset.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_copy.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_attr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_cond_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_condattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_mutex_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_once_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_rwlock_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_rwlockattr_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_key_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsblkcnt_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fsfilcnt_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/constrained_ctypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/_param.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_param.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/net/net_kev.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_sa_family_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_socklen_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_iovec_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdint.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdint.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uint8_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uint16_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uint32_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uint64_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_intmax_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uintmax_t.h \
+  /Users/hanifadelekan/dev/Trading-Prod/server/uWebSockets/uSockets/src/internal/eventing/epoll_kqueue.h \
+  /Users/hanifadelekan/dev/Trading-Prod/server/uWebSockets/uSockets/src/internal/loop_data.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/event.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/queue.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/string.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_string.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_null.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_strings.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/secure/_strings.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/secure/_common.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/secure/_string.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/ssl.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/macros.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/opensslconf.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/configuration.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/opensslv.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/e_os2.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/inttypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/inttypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_inttypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_wchar_t.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/e_ostime.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_timespec.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_timeval.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_timeval64.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_time.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_select.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/comp.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/crypto.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdlib.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_stdlib.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/wait.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/signal.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/signal.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/signal.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/_mcontext.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_mcontext.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/machine/_structs.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/arm/_structs.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigaltstack.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_ucontext.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_sigset_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/resource.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/alloca.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_ct_rune_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_rune_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/malloc/_malloc.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/malloc/_malloc_type.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/malloc/_ptrcheck.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_abort.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_va_list.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/stdio.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_printf.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_seek_set.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_ctermid.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/secure/_stdio.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/safestack.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/stack.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/types.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_limits.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/syslimits.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/cryptoerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/symhacks.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/cryptoerr_legacy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/core.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stddef.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_header_macro.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_ptrdiff_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_size_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_rsize_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_wchar_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_null.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_max_align_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stddef_offsetof.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/sched.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/pthread_impl.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/qos.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/qos.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_mach_port_t.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/comperr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/bio.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/stdarg.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stdarg_header_macro.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stdarg___gnuc_va_list.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stdarg_va_list.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stdarg_va_arg.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stdarg___va_copy.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/16/include/__stdarg_va_copy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/bioerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/x509.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/buffer.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/buffererr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/evp.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/core_dispatch.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/indicator.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/params.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/bn.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/bnerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/evperr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/objects.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/obj_mac.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/asn1.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/asn1err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/objectserr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/ec.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/ecerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/rsa.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/rsaerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/dsa.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/dh.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/dherr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/dsaerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/sha.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/x509err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/x509_vfy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/lhash.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/pkcs7.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/pkcs7err.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/http.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/conf.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/conferr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/conftypes.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/pem.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/pemerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/hmac.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/async.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/asyncerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/ct.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/cterr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/sslerr.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/sslerr_legacy.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/prov_ssl.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/ssl2.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/ssl3.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/tls1.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/dtls1.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/srtp.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/quic.h \
+  /opt/homebrew/Cellar/openssl@3/3.5.1/include/openssl/err.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/errno.h
