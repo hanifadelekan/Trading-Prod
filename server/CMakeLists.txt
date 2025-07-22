@@ -8,26 +8,29 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(UWS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/uWebSockets/uWebSockets)
 set(USOCKETS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/uWebSockets/uSockets)
 
-# --- Homebrew Cellar Paths ---
-# OpenSSL@3 (version 3.5.1)
-set(OPENSSL_CELLAR_ROOT /opt/homebrew/Cellar/openssl@3/3.5.1)
-set(OPENSSL_INCLUDE_DIR ${OPENSSL_CELLAR_ROOT}/include)
-set(OPENSSL_LIBRARIES ${OPENSSL_CELLAR_ROOT}/lib)
-include_directories(${OPENSSL_INCLUDE_DIR})
-link_directories(${OPENSSL_LIBRARIES})
-
-# libuv (version 1.51.0)
-set(LIBUV_CELLAR_ROOT /opt/homebrew/Cellar/libuv/1.51.0)
-include_directories(${LIBUV_CELLAR_ROOT}/include)
-link_directories(${LIBUV_CELLAR_ROOT}/lib)
-
-# nlohmann/json (version 3.12.0 based on your previous output)
-set(NLOHMANN_JSON_CELLAR_ROOT /opt/homebrew/Cellar/nlohmann-json/3.12.0)
-set(NLOHMANN_JSON_INCLUDE_DIR ${NLOHMANN_JSON_CELLAR_ROOT}/include)
-include_directories(${NLOHMANN_JSON_INCLUDE_DIR})
-
-# Find the OpenSSL library (required for SSL support)
+# --- Find System Libraries (for Ubuntu/Standard Linux) ---
+# OpenSSL
+# CMake's find_package will locate OpenSSL in standard system paths (e.g., /usr/lib, /usr/include)
 find_package(OpenSSL REQUIRED)
+
+# libuv
+# Find libuv. It's often found as 'Libuv' or just 'uv'
+find_package(Libuv CONFIG REQUIRED) # Try CONFIG mode first for modern CMake modules
+# If the above fails, you might need to use:
+# find_package(PkgConfig QUIET)
+# pkg_check_modules(LIBUV REQUIRED libuv)
+# Or manually:
+# find_path(LIBUV_INCLUDE_DIR NAMES uv.h PATHS /usr/include /usr/local/include /usr/include/libuv)
+# find_library(LIBUV_LIBRARY NAMES uv PATHS /usr/lib /usr/local/lib /usr/lib/x86_64-linux-gnu)
+# if(LIBUV_INCLUDE_DIR AND LIBUV_LIBRARY)
+#     message(STATUS "Found libuv: ${LIBUV_LIBRARY}")
+# else()
+#     message(FATAL_ERROR "libuv not found. Please install libuv-dev package.")
+# endif()
+
+
+# nlohmann/json (typically header-only, but can be found via find_package if installed via apt)
+find_package(nlohmann_json CONFIG REQUIRED) # Assumes nlohmann-json-dev package provides a CMake config
 
 # Collect all .c files from uSockets (core, eventing, crypto)
 file(GLOB USOCKETS_SOURCES
@@ -82,8 +85,7 @@ target_link_libraries(uwebsockets PRIVATE
     OpenSSL::Crypto
     pthread
     z
-    # Link libuv explicitly if uWebSockets/uSockets needs it directly
-    uv # This links against the libuv library found via the Cellar path
+    Libuv::Libuv # Link against the target provided by find_package(Libuv)
 )
 
 # Build your main executable
@@ -93,14 +95,15 @@ add_executable(new_monitor new_monitor.cpp)
 target_include_directories(new_monitor PRIVATE
     "${UWS_DIR}/src"             # for uWS.h
     "${USOCKETS_DIR}/src"        # for uSockets
-    # nlohmann/json is now handled by the include_directories call above
+    # nlohmann/json headers are handled by nlohmann_json::nlohmann_json target
 )
 
 # Link the final executable
 target_link_libraries(new_monitor PRIVATE
-    uwebsockets  # Link against the newly built uwebsockets library
-    usockets     # Ensure usockets is also linked directly
+    uwebsockets                  # Link against the newly built uwebsockets library
+    usockets                     # Ensure usockets is also linked directly
     pthread
     z
-    uv           # Link libuv explicitly for the main executable as well
+    Libuv::Libuv                 # Link libuv explicitly for the main executable
+    nlohmann_json::nlohmann_json # Link against the target provided by find_package(nlohmann_json)
 )
