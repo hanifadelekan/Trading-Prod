@@ -14,20 +14,26 @@ set(USOCKETS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/uWebSockets/uSockets)
 find_package(OpenSSL REQUIRED)
 
 # libuv
-# Find libuv. It's often found as 'Libuv' or just 'uv'
-find_package(Libuv CONFIG REQUIRED) # Try CONFIG mode first for modern CMake modules
-# If the above fails, you might need to use:
-# find_package(PkgConfig QUIET)
-# pkg_check_modules(LIBUV REQUIRED libuv)
-# Or manually:
-# find_path(LIBUV_INCLUDE_DIR NAMES uv.h PATHS /usr/include /usr/local/include /usr/include/libuv)
-# find_library(LIBUV_LIBRARY NAMES uv PATHS /usr/lib /usr/local/lib /usr/lib/x86_64-linux-gnu)
-# if(LIBUV_INCLUDE_DIR AND LIBUV_LIBRARY)
-#     message(STATUS "Found libuv: ${LIBUV_LIBRARY}")
-# else()
-#     message(FATAL_ERROR "libuv not found. Please install libuv-dev package.")
-# endif()
-
+# Use PkgConfig to find libuv, which is common on Linux distributions
+find_package(PkgConfig QUIET)
+if (PKG_CONFIG_FOUND)
+    pkg_check_modules(LIBUV REQUIRED libuv)
+    if (NOT LIBUV_FOUND)
+        message(FATAL_ERROR "libuv not found via PkgConfig. Please ensure libuv-dev is installed and pkg-config is set up correctly.")
+    endif()
+else()
+    # Fallback if PkgConfig is not found or not preferred
+    message(STATUS "PkgConfig not found, attempting manual libuv discovery.")
+    find_path(LIBUV_INCLUDE_DIR NAMES uv.h PATHS /usr/include /usr/local/include /usr/include/libuv)
+    find_library(LIBUV_LIBRARY NAMES uv PATHS /usr/lib /usr/local/lib /usr/lib/x86_64-linux-gnu)
+    if(LIBUV_INCLUDE_DIR AND LIBUV_LIBRARY)
+        message(STATUS "Found libuv manually: ${LIBUV_LIBRARY}")
+        set(LIBUV_INCLUDE_DIRS ${LIBUV_INCLUDE_DIR})
+        set(LIBUV_LIBRARIES ${LIBUV_LIBRARY})
+    else()
+        message(FATAL_ERROR "libuv not found manually. Please install libuv-dev package.")
+    endif()
+endif()
 
 # nlohmann/json (typically header-only, but can be found via find_package if installed via apt)
 find_package(nlohmann_json CONFIG REQUIRED) # Assumes nlohmann-json-dev package provides a CMake config
@@ -76,6 +82,7 @@ add_library(uwebsockets STATIC ${UWS_SOURCES})
 target_include_directories(uwebsockets PRIVATE
     "${UWS_DIR}/src"
     "${USOCKETS_DIR}/src"
+    ${LIBUV_INCLUDE_DIRS} # Include libuv headers
 )
 
 # Link uWebSockets to uSockets and other necessary dependencies
@@ -85,7 +92,7 @@ target_link_libraries(uwebsockets PRIVATE
     OpenSSL::Crypto
     pthread
     z
-    Libuv::Libuv # Link against the target provided by find_package(Libuv)
+    ${LIBUV_LIBRARIES} # Link against libuv
 )
 
 # Build your main executable
@@ -104,6 +111,6 @@ target_link_libraries(new_monitor PRIVATE
     usockets                     # Ensure usockets is also linked directly
     pthread
     z
-    Libuv::Libuv                 # Link libuv explicitly for the main executable
+    ${LIBUV_LIBRARIES}           # Link libuv explicitly for the main executable
     nlohmann_json::nlohmann_json # Link against the target provided by find_package(nlohmann_json)
 )
