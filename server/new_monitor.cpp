@@ -72,12 +72,12 @@ int main(int argc, char* argv[]) {
     std::cout << "[Server] WebSocket server listening on port " << port << std::endl;
     std::cout << "[Monitor] Watching file: " << filepath << std::endl;
 
-    // --- Run the WebSocket Event Loop (modified for graceful exit) ---
-    // Use hub.run(timeout_ms) to allow the loop to periodically check keep_running
-    while (keep_running) {
-        hub.run(100); // Process events for up to 100ms, then return
-    }
-    std::cout << "[Main] Hub event loop terminated." << std::endl; // Debug print
+    // --- Run the WebSocket Event Loop ---
+    // hub.run() is a blocking call. The program will stay here until terminated.
+    // The signal handler will set 'keep_running' to false for the monitor thread.
+    std::cout << "[Main] Starting hub event loop (blocking)..." << std::endl; // Debug print
+    hub.run();
+    std::cout << "[Main] Hub event loop terminated." << std::endl; // Debug print (reached on exit)
 
     // --- Cleanup ---
     // This part will be reached after the event loop terminates
@@ -98,9 +98,8 @@ void signal_handler(int signal) {
         if (keep_running) {
             std::cerr << "\n[Main] Shutdown signal received. Exiting gracefully...\n";
             keep_running = false; // Signal all loops to stop
-            std::cerr << "[Main] Calling hub.stop()..." << std::endl; // Debug print
-            hub.stop(); // Explicitly stop the uWS hub's event loop
-            std::cerr << "[Main] hub.stop() called." << std::endl; // Debug print
+            // Removed hub.stop() as it's not available in this uWS version.
+            // Relying on default signal behavior or process termination.
         }
     }
 }
