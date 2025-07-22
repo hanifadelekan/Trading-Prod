@@ -12,53 +12,61 @@
 #include "uWS.h"
 #include "nlohmann/json.hpp"
 
-// Use namespaces for convenience
 using json = nlohmann::json;
 
 // --- Global Variables ---
-
-// Atomic flag for graceful shutdown across threads
 std::atomic<bool> keep_running(true);
-
-// WebSocket server group to manage all connected clients
 uWS::Group<uWS::SERVER>* ws_group = nullptr;
-std::mutex ws_mutex; // Mutex to protect access to the ws_group
+std::mutex ws_mutex;
+uWS::Hub hub;
 
-// Make the uWS::Hub instance global so it can be accessed by the signal handler
-uWS::Hub hub; // Declare hub globally
+// File thread management
+std::thread file_thread;
+std::atomic<int> client_count(0);
+std::atomic<bool> keep_file_running(false);
+std::string global_filepath;  // Stores the file path to monitor
 
 // --- Function Declarations ---
 void signal_handler(int signal);
-void file_monitor_thread(const std::string& filepath);
+void file_monitor_thread();
 
 // --- Main Application ---
 
 int main(int argc, char* argv[]) {
-    // Check for correct command-line arguments
     if (argc < 2) {
         std::cerr << "Usage: " << argv[0] << " <filepath_to_monitor>\n";
         return 1;
     }
-    const std::string filepath = argv[1];
+    global_filepath = argv[1];
     const int port = 9002;
 
-    // Register signal handlers for graceful shutdown
     std::signal(SIGINT, signal_handler);
     std::signal(SIGTERM, signal_handler);
 
-    // --- WebSocket Server Setup ---
-    // hub is now a global instance, so no need to declare it here
     ws_group = hub.createGroup<uWS::SERVER>();
 
     ws_group->onConnection([](uWS::WebSocket<uWS::SERVER>* ws, uWS::HttpRequest req) {
         std::cout << "[Server] Client connected." << std::endl;
+        if (client_count++ == 0) {
+            // First client - start file thread
+            keep_file_running = true;
+            file_thread = std::thread(file_monitor_thread);
+            std::cout << "[Monitor] Starting file monitoring." << std::endl;
+        }
     });
 
     ws_group->onDisconnection([](uWS::WebSocket<uWS::SERVER>* ws, int code, char* message, size_t length) {
         std::cout << "[Server] Client disconnected." << std::endl;
+        if (--client_count == 0) {
+            // Last client - stop file thread
+            keep_file_running = false;
+            if (file_thread.joinable()) {
+                file_thread.join();
+                std::cout << "[Monitor] File monitoring stopped." << std::endl;
+            }
+        }
     });
 
-    // We don't need an onMessage handler as this server only broadcasts data
     ws_group->onMessage([](uWS::WebSocket<uWS::SERVER>* ws, char* message, size_t length, uWS::OpCode opCode) {});
 
     if (!hub.listen(port)) {
@@ -66,27 +74,18 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // --- Start File Monitoring in a Background Thread ---
-    std::thread monitor_thread(file_monitor_thread, filepath);
-
     std::cout << "[Server] WebSocket server listening on port " << port << std::endl;
-    std::cout << "[Monitor] Watching file: " << filepath << std::endl;
+    std::cout << "[Monitor] File to watch: " << global_filepath << std::endl;
 
-    // --- Run the WebSocket Event Loop ---
-    // hub.run() is a blocking call. The program will stay here until terminated.
-    // The signal handler will set 'keep_running' to false for the monitor thread.
-    std::cout << "[Main] Starting hub event loop (blocking)..." << std::endl; // Debug print
     hub.run();
-    std::cout << "[Main] Hub event loop terminated." << std::endl; // Debug print (reached on exit)
 
-    // --- Cleanup ---
-    // This part will be reached after the event loop terminates
-    std::cout << "[Server] Shutting down..." << std::endl;
-    // ensure keep_running is false for monitor thread's final check
+    // Server shutdown sequence
     keep_running = false;
-    std::cout << "[Main] Attempting to join monitor thread..." << std::endl; // Debug print
-    monitor_thread.join(); // Wait for the monitor thread to finish cleanly
-    std::cout << "[Main] Monitor thread joined." << std::endl; // Debug print
+    keep_file_running = false;  // Ensure file thread stops
+
+    if (file_thread.joinable()) {
+        file_thread.join();
+    }
 
     return 0;
 }
@@ -97,60 +96,47 @@ void signal_handler(int signal) {
     if (signal == SIGINT || signal == SIGTERM) {
         if (keep_running) {
             std::cerr << "\n[Main] Shutdown signal received. Exiting gracefully...\n";
-            keep_running = false; // Signal all loops to stop
-            // Removed hub.stop() as it's not available in this uWS version.
-            // Relying on default signal behavior or process termination.
+            keep_running = false;
+            hub.uWS::Hub::getDefaultGroup<uWS::SERVER>().close();
         }
     }
 }
 
 // --- File Monitoring Thread Implementation ---
 
-void file_monitor_thread(const std::string& filepath) {
-    // Disable buffering for immediate output in this thread
-    std::setvbuf(stdout, nullptr, _IONBF, 0);
-    std::cout << std::unitbuf;
-
-    std::ifstream file(filepath);
+void file_monitor_thread() {
+    std::ifstream file(global_filepath);
     if (!file) {
-        std::cerr << "[Monitor] Error opening file: " << filepath << std::endl;
-        keep_running = false; // Signal main to exit if file cannot be opened
+        std::cerr << "[Monitor] Error opening file: " << global_filepath << std::endl;
         return;
     }
 
-    // Main loop to read and process the file
-    while (keep_running) {
+    // Main processing loop
+    while (keep_file_running && keep_running) {
         std::string line;
         if (std::getline(file, line)) {
             if (line.empty()) continue;
 
             try {
-                // Parse the line as a JSON object
+                // Validate JSON before broadcasting
                 json data = json::parse(line);
-
-                // For HFT, we just forward the raw JSON line.
-                // The client GUI will be responsible for parsing and displaying.
                 {
                     std::lock_guard<std::mutex> lock(ws_mutex);
                     if (ws_group) {
                         ws_group->broadcast(line.c_str(), line.length(), uWS::OpCode::TEXT);
                     }
                 }
-
-            } catch (const json::parse_error& e) {
-                // Silently ignore non-JSON lines (e.g., logs, status messages)
-            } catch (const std::exception& e) {
-                std::cerr << "[Monitor] Data processing error: " << e.what() << std::endl;
+            } catch (const json::parse_error&) {
+                // Silently ignore non-JSON lines
             }
         } else {
             if (file.eof()) {
-                file.clear(); // Clear EOF flag to allow further reads
+                file.clear();  // Clear EOF flag
+                file.seekg(0, std::ios::end);  // Seek to end for new data
             }
-            // Sleep briefly to prevent high CPU usage when no new data is available
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
 
     file.close();
-    std::cout << "[Monitor] File monitoring thread finished." << std::endl;
 }

@@ -122,7 +122,7 @@ void WebSocketReceiver::ParseMessage(const std::string& message) {
     try {
         // Parse the string into a JSON object
         auto j = json::parse(message);
-        
+        std::cout << j << std::endl;
         // Pass the raw JSON object directly to the viewer
         viewer_.OnDataReceived(j);
 
