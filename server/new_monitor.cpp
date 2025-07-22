@@ -3,12 +3,9 @@
 #include <string>
 #include <csignal>
 #include <atomic>
-#include <limits>
-#include <iomanip>
 #include <thread>
 #include <chrono>
 #include <mutex>
-#include <vector>
 #include "uWS.h"
 #include "nlohmann/json.hpp"
 
@@ -24,7 +21,7 @@ uWS::Hub hub;
 std::thread file_thread;
 std::atomic<int> client_count(0);
 std::atomic<bool> keep_file_running(false);
-std::string global_filepath;  // Stores the file path to monitor
+std::string global_filepath;
 
 // --- Function Declarations ---
 void signal_handler(int signal);
@@ -46,8 +43,8 @@ int main(int argc, char* argv[]) {
     ws_group = hub.createGroup<uWS::SERVER>();
 
     ws_group->onConnection([](uWS::WebSocket<uWS::SERVER>* ws, uWS::HttpRequest req) {
-        std::cout << "[Server] Client connected." << std::endl;
-        if (client_count++ == 0) {
+        std::cout << "[Server] Client connected. Total clients: " << ++client_count << std::endl;
+        if (client_count == 1) {
             // First client - start file thread
             keep_file_running = true;
             file_thread = std::thread(file_monitor_thread);
@@ -56,8 +53,8 @@ int main(int argc, char* argv[]) {
     });
 
     ws_group->onDisconnection([](uWS::WebSocket<uWS::SERVER>* ws, int code, char* message, size_t length) {
-        std::cout << "[Server] Client disconnected." << std::endl;
-        if (--client_count == 0) {
+        std::cout << "[Server] Client disconnected. Total clients: " << --client_count << std::endl;
+        if (client_count == 0) {
             // Last client - stop file thread
             keep_file_running = false;
             if (file_thread.joinable()) {
@@ -68,6 +65,11 @@ int main(int argc, char* argv[]) {
     });
 
     ws_group->onMessage([](uWS::WebSocket<uWS::SERVER>* ws, char* message, size_t length, uWS::OpCode opCode) {});
+
+    // Add error handler
+    ws_group->onError([](void* user) {
+        std::cerr << "[Server] WebSocket error occurred." << std::endl;
+    });
 
     if (!hub.listen(port)) {
         std::cerr << "[Server] Failed to listen on port " << port << std::endl;
@@ -81,7 +83,7 @@ int main(int argc, char* argv[]) {
 
     // Server shutdown sequence
     keep_running = false;
-    keep_file_running = false;  // Ensure file thread stops
+    keep_file_running = false;
 
     if (file_thread.joinable()) {
         file_thread.join();
@@ -97,6 +99,8 @@ void signal_handler(int signal) {
         if (keep_running) {
             std::cerr << "\n[Main] Shutdown signal received. Exiting gracefully...\n";
             keep_running = false;
+            // Close all connections and stop the hub
+            ws_group->close();
             hub.uWS::Hub::getDefaultGroup<uWS::SERVER>().close();
         }
     }
@@ -111,32 +115,78 @@ void file_monitor_thread() {
         return;
     }
 
-    // Main processing loop
+    // Start reading from the end of the file
+    file.seekg(0, std::ios::end);
+    std::streampos last_pos = file.tellg();
+    int line_count = 0;
+    int broadcast_count = 0;
+    auto last_log_time = std::chrono::steady_clock::now();
+
+    std::cout << "[Monitor] Starting monitoring from end of file\n";
+
     while (keep_file_running && keep_running) {
         std::string line;
-        if (std::getline(file, line)) {
-            if (line.empty()) continue;
-
-            try {
-                // Validate JSON before broadcasting
-                json data = json::parse(line);
-                {
-                    std::lock_guard<std::mutex> lock(ws_mutex);
-                    if (ws_group) {
-                        ws_group->broadcast(line.c_str(), line.length(), uWS::OpCode::TEXT);
-                    }
-                }
-            } catch (const json::parse_error&) {
-                // Silently ignore non-JSON lines
-            }
-        } else {
-            if (file.eof()) {
-                file.clear();  // Clear EOF flag
-                file.seekg(0, std::ios::end);  // Seek to end for new data
-            }
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        
+        // Check if file was rotated (common with hourly files)
+        std::ifstream new_check(global_filepath);
+        if (!new_check) {
+            std::cerr << "[Monitor] File missing, waiting..." << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            continue;
         }
+        
+        new_check.seekg(0, std::ios::end);
+        if (new_check.tellg() < last_pos) {
+            std::cout << "[Monitor] File reset detected, reopening..." << std::endl;
+            file.close();
+            file.open(global_filepath);
+            if (!file) {
+                std::cerr << "[Monitor] Reopen failed" << std::endl;
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                continue;
+            }
+            last_pos = 0;
+        }
+        
+        // Read new lines
+        file.clear(); // Clear any error flags
+        file.seekg(last_pos);
+        while (std::getline(file, line)) {
+            if (!line.empty()) {
+                try {
+                    // Validate JSON before broadcasting
+                    json data = json::parse(line);
+                    {
+                        std::lock_guard<std::mutex> lock(ws_mutex);
+                        if (ws_group) {
+                            ws_group->broadcast(line.c_str(), line.length(), uWS::OpCode::TEXT);
+                            broadcast_count++;
+                        }
+                    }
+                } catch (const json::parse_error&) {
+                    // Silently ignore non-JSON lines
+                }
+                line_count++;
+            }
+        }
+        
+        // Update position and handle EOF
+        last_pos = file.tellg();
+        if (file.eof()) {
+            file.clear();
+        }
+        
+        // Periodic logging
+        auto now = std::chrono::steady_clock::now();
+        if (now - last_log_time > std::chrono::seconds(5)) {
+            std::cout << "[Monitor] Status: " << line_count << " lines processed, "
+                      << broadcast_count << " broadcasts" << std::endl;
+            last_log_time = now;
+        }
+        
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     file.close();
+    std::cout << "[Monitor] Exiting after " << line_count << " lines processed\n";
 }
