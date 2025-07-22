@@ -24,6 +24,9 @@ std::atomic<bool> keep_running(true);
 uWS::Group<uWS::SERVER>* ws_group = nullptr;
 std::mutex ws_mutex; // Mutex to protect access to the ws_group
 
+// Make the uWS::Hub instance global so it can be accessed by the signal handler
+uWS::Hub hub; // Declare hub globally
+
 // --- Function Declarations ---
 void signal_handler(int signal);
 void file_monitor_thread(const std::string& filepath);
@@ -44,7 +47,7 @@ int main(int argc, char* argv[]) {
     std::signal(SIGTERM, signal_handler);
 
     // --- WebSocket Server Setup ---
-    uWS::Hub hub;
+    // hub is now a global instance, so no need to declare it here
     ws_group = hub.createGroup<uWS::SERVER>();
 
     ws_group->onConnection([](uWS::WebSocket<uWS::SERVER>* ws, uWS::HttpRequest req) {
@@ -69,14 +72,21 @@ int main(int argc, char* argv[]) {
     std::cout << "[Server] WebSocket server listening on port " << port << std::endl;
     std::cout << "[Monitor] Watching file: " << filepath << std::endl;
 
-    // --- Run the WebSocket Event Loop (this is a blocking call) ---
-    hub.run();
+    // --- Run the WebSocket Event Loop (modified for graceful exit) ---
+    // Use hub.run(timeout_ms) to allow the loop to periodically check keep_running
+    while (keep_running) {
+        hub.run(100); // Process events for up to 100ms, then return
+    }
+    std::cout << "[Main] Hub event loop terminated." << std::endl; // Debug print
 
     // --- Cleanup ---
-    // This part will be reached after hub.run() exits (e.g., on signal)
+    // This part will be reached after the event loop terminates
     std::cout << "[Server] Shutting down..." << std::endl;
-    keep_running = false; // Signal the monitor thread to stop
+    // ensure keep_running is false for monitor thread's final check
+    keep_running = false;
+    std::cout << "[Main] Attempting to join monitor thread..." << std::endl; // Debug print
     monitor_thread.join(); // Wait for the monitor thread to finish cleanly
+    std::cout << "[Main] Monitor thread joined." << std::endl; // Debug print
 
     return 0;
 }
@@ -87,8 +97,10 @@ void signal_handler(int signal) {
     if (signal == SIGINT || signal == SIGTERM) {
         if (keep_running) {
             std::cerr << "\n[Main] Shutdown signal received. Exiting gracefully...\n";
-            keep_running = false;
-            // You might need a way to gracefully stop the hub if it's running
+            keep_running = false; // Signal all loops to stop
+            std::cerr << "[Main] Calling hub.stop()..." << std::endl; // Debug print
+            hub.stop(); // Explicitly stop the uWS hub's event loop
+            std::cerr << "[Main] hub.stop() called." << std::endl; // Debug print
         }
     }
 }
@@ -103,7 +115,7 @@ void file_monitor_thread(const std::string& filepath) {
     std::ifstream file(filepath);
     if (!file) {
         std::cerr << "[Monitor] Error opening file: " << filepath << std::endl;
-        keep_running = false;
+        keep_running = false; // Signal main to exit if file cannot be opened
         return;
     }
 
