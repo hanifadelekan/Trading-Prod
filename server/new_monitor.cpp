@@ -66,9 +66,9 @@ int main(int argc, char* argv[]) {
 
     ws_group->onMessage([](uWS::WebSocket<uWS::SERVER>* ws, char* message, size_t length, uWS::OpCode opCode) {});
 
-    // Add error handler
-    ws_group->onError([](void* user) {
-        std::cerr << "[Server] WebSocket error occurred." << std::endl;
+    // Fixed error handler
+    ws_group->onError([](int code) {
+        std::cerr << "[Server] WebSocket error occurred. Code: " << code << std::endl;
     });
 
     if (!hub.listen(port)) {
